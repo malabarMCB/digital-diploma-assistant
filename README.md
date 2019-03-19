@@ -1,0 +1,3 @@
+# digital-diploma-assistant
+
+Here will be some magic soon...
