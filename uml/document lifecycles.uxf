@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>165</x>
+      <y>185</y>
+      <w>235</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist + weekly review despite of status&gt;&gt;
+Щоденник практики</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>225</y>
+      <w>200</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist&gt;&gt;
+Звіт з практики</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>110</y>
+      <w>340</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- (NormChecker- UNICHECK Manager) in same time - Metodist&gt;&gt;
+Презентація до захисту</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>175</y>
+      <w>195</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- UNICHECK Manager - Metodist
+Висновок про наявність плагіату</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>145</y>
+      <w>205</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist&gt;&gt;
+Дипломна робота</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>210</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student from template - Master of science - Metodist)&gt;&gt;
+Відгук наукового керівника</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>245</y>
+      <w>110</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student - Metodist&gt;&gt;
+Рецензія</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>275</y>
+      <w>70</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;redundant&gt;&gt;
+Диск з ПО</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>300</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student scans publications - Metodist&gt;&gt;
+Роздруківки публікації</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>335</y>
+      <w>145</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student - Master of science - Metodist&gt;&gt;
+Акти впровадженя</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>375</y>
+      <w>165</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student - Master of science - Metodist&gt;&gt;
+Гарантійний лист</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>160</y>
+      <w>135</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist&gt;&gt;
+Презентація предзахисту</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>640</x>
+      <y>90</y>
+      <w>370</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>Захист дипломної роботи
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>200</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist&gt;&gt;
+Дипломна робота</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>435</x>
+      <y>135</y>
+      <w>165</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>Предзахист дипломної роботи
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>145</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science- Metodist&gt;&gt;
+Презентація захисту практики</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>175</x>
+      <y>260</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student from template - Master of science - Metodist&gt;&gt;
+Бланк заяви про обрання теми</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>150</x>
+      <y>110</y>
+      <w>255</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Практика/ захист практики
+--
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>10</x>
+      <y>150</y>
+      <w>130</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>Тема наукового пошуку
+--
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>15</x>
+      <y>170</y>
+      <w>115</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;redundant&gt;&gt;
+&lt;&lt;Student- Master of science&gt;&gt;
+Стаття</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>0</x>
+      <y>15</y>
+      <w>145</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=yellow
+--
+
+Metodist not aproves -&gt; student</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>175</x>
+      <y>300</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student from template - Master of science - Metodist&gt;&gt;
+Відгук керівника</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>15</x>
+      <y>215</y>
+      <w>115</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Student- Master of science&gt;&gt;
+Дипломна робота (початок)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
