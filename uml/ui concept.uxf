@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>153</x>
+      <y>90</y>
+      <w>378</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>Dashboard page
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>279</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Task</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>324</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Task</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>369</y>
+      <w>180</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Task
+--
+Asignee: Имя Фамилия
+Group: BS-51
+Type: "Щоденник практики"
+Status: NeedsWork
+Deadline: 05.05.2020</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>225</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>To Do</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>279</x>
+      <y>225</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>In Progress</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>225</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Done</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>549</x>
+      <y>90</y>
+      <w>369</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>Task page
+--
+Creator: Имя Фамилия Должность 
+Asignee: Имя Фамилия
+Group: BS-51
+Type: "Щоденник практики"
+Status: 
+[ToDo, InProgress, ReadyForScienceMaster
+,ScienceMasterInProgress, NeedsWork, ReadyForMetodist, 
+MetodistInProgress, ReadyForUnicheck, UnicheckInProgress,
+ReadyForNormChecker, NormCheckerInProgress, Complete]
+Deadline: 05.05,2020 
+CompleteDate: 05.06.2020 // when metodist presess complete
+
+&lt;&lt;Chane status1 btn&gt;&gt;    &lt;&lt;Chane status2 btn&gt;&gt;
+---
+
+Task description: сделать Щоденник практики
+Attachments
+---
+
+Cooments</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>162</x>
+      <y>513</y>
+      <w>360</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Dashboar permissions
+bg=yellow
+--
+Student: only his tasks and tasks that he did
+ScienceMaster: only his stidents stasks
+Metodist: everything
+UnicheckManager: everyone dimlomas 
+NormController: everyone dimplomas</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>945</x>
+      <y>90</y>
+      <w>315</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>Metodist admin page
+--
+DownloadTemplates: [Шаблон щоденика практики, 
+Бланк заяви про обрання теми, Звіт з практики, 
+Презентація захисту практики, Відргук керівника]
+
+Write descriptions for each Task
+
+Chage all deadlines
+TaskType; PeopleDropDown with filter; NewDate
+
+Archive group &lt;&lt;drop down list&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>558</x>
+      <y>513</y>
+      <w>342</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Notification
+bg=white
+--
+Task status changes -&gt; notification to student and asignee</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>126</y>
+      <w>333</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Search (for all but not for student)
+--
+Group
+Name Surname
+TaskType</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>90</y>
+      <w>135</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>Login page
+--
+
+Login
+Password</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
