@@ -24,7 +24,9 @@ type Startup private () =
     member this.Configure(app: IApplicationBuilder, env: IHostingEnvironment) =
         if (env.IsDevelopment()) then
             app.UseDeveloperExceptionPage() |> ignore
-
-        app.UseMvc() |> ignore
+        
+        app.UseMvc(fun routes ->
+            routes.MapRoute("default", "{controller=Dashboard}/{action=Index}/{id?}") |> ignore
+            ) |> ignore
 
     member val Configuration : IConfiguration = null with get, set

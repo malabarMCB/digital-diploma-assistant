@@ -1,0 +1,21 @@
+@using System.Linq
+@model Microsoft.FSharp.Collections.FSharpList<DataAccess.Query.DashboardQuery.Task>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Hello dashboard</title>
+</head>
+<body>
+<div>
+    @foreach (var task in Model)
+    {
+        <div>@task.Name</div><br/>
+        <div>@task.Asignee</div><br/>
+        <div>@task.Group</div><br/>
+        <div>@task.Status</div><br/>
+    }
+</div>
+</body>
+</html>
