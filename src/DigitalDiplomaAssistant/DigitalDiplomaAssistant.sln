@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Domain", "Domain\Domain.fsp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DataAccess", "DataAccess\DataAccess.fsproj", "{BC98865A-2435-4E07-9100-228286A6FFB0}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Playground", "Playground\Playground.fsproj", "{F7F1B8AD-8E25-4161-AF1D-592D67194C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BC98865A-2435-4E07-9100-228286A6FFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC98865A-2435-4E07-9100-228286A6FFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC98865A-2435-4E07-9100-228286A6FFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F1B8AD-8E25-4161-AF1D-592D67194C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F1B8AD-8E25-4161-AF1D-592D67194C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F1B8AD-8E25-4161-AF1D-592D67194C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F1B8AD-8E25-4161-AF1D-592D67194C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

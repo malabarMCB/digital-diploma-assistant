@@ -1,8 +1,8 @@
 elasticsearch:
-  image: ukrelastic7.0.0
+  image: ukrelastic6.6.0
   container_name: elasticsearch
-  environment: 
-    - discovery.type=single-node
+  # environment: 
+  #   - discovery.type=single-node
   ports:
     - "9200:9200"
     - "9300:9300"
@@ -10,7 +10,7 @@ elasticsearch:
     - /home/malabar/elk/elastic:/usr/share/elasticsearch/data
 
 kibana:
-  image: docker.elastic.co/kibana/kibana:7.0.0
+  image: docker.elastic.co/kibana/kibana:6.6.0
   container_name: kibana
   ports:
    - "5601:5601"
