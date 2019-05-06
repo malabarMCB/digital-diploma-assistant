@@ -5,7 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Include="ElasticConfig.fs" />
+      <Compile Include="ElasticTypes.fs" />
+      <Compile Include="FsNest.fs" />
       <Compile Include="Query\DashboardQuery.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NEST" Version="6.6.0" />
     </ItemGroup>
 
 </Project>

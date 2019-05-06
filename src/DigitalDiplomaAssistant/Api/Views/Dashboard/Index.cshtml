@@ -1,5 +1,5 @@
 @using System.Linq
-@model Microsoft.FSharp.Collections.FSharpList<DataAccess.Query.DashboardQuery.Task>
+@model IEnumerable<DataAccess.Query.DashboardQuery.Task>
 
 <!DOCTYPE html>
 
@@ -11,10 +11,13 @@
 <div>
     @foreach (var task in Model)
     {
-        <div>@task.Name</div><br/>
-        <div>@task.Asignee</div><br/>
+        <div>@task.Id</div><br/>
+        <div>@task.Type</div><br/>
+        <div>@task.Student</div><br/>
+        <div>@task.Assignee</div><br/>
         <div>@task.Group</div><br/>
         <div>@task.Status</div><br/>
+        <div>@task.Deadline</div><br/>
     }
 </div>
 </body>
