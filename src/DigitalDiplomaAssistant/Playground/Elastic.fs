@@ -1,10 +1,11 @@
-namespace Tests
+﻿namespace Tests
 
 open Common
 open DataAccess.Query
 open System
 open NUnit.Framework
 open Nest
+open DataAccess.Types
 
 type Data = {
         Name: string
@@ -18,7 +19,7 @@ type Data = {
 module FsNest = 
     open Nest
 
-    let query<'T when 'T: not struct> (elasticClient: ElasticClient) indexName typeName (f:(unit -> QueryContainer))= 
+    let query<'T when 'T: not struct>  indexName typeName (f:(unit -> QueryContainer)) (elasticClient: ElasticClient)= 
         elasticClient.Search<'T>(fun (s: SearchDescriptor<'T>) -> 
             let index = Indices.Parse(indexName)
             let types = Types.Parse(typeName)
@@ -27,8 +28,8 @@ module FsNest =
             request :> ISearchRequest
         )
 
-    let config<'T when 'T: not struct> (f: (ClrTypeMappingDescriptor<'T> -> IClrTypeMapping<'T>)) = 
-        new Func<ClrTypeMappingDescriptor<'T>, IClrTypeMapping<'T>>(f)
+    let hits<'T when 'T: not struct> (query: ISearchResponse<'T>) = 
+        query.Hits |> Seq.cast<IHit<'T>>
 
 
 [<TestClass>]
@@ -85,10 +86,26 @@ type TestClass () =
         settings.DefaultIndex("dda") |> ignore
         let client = ElasticClient(settings);
 
-        let search = FsNest.query<DashboardQuery.Task> client "dda" "task" (fun () -> 
+        let search = client |> FsNest.query<DashboardQuery.Task> "dda" "task" (fun () -> 
             let query = QueryContainer(MatchAllQuery())
             query
-            )
+            ) 
         search.Hits |> Seq.cast<IHit<DashboardQuery.Task>> |> Seq.iter( fun x -> x.Source |> printfn "%A")
         search.Documents |> printfn "%A"
+        ()
+
+    [<Test>]
+    member __.ShouldFindByKeyword () = 
+        let node = new Uri(elasticUri)
+        let settings = new ConnectionSettings(node);
+        settings.BasicAuthentication(elasticUserName,elasticPassword) |> ignore
+        settings.EnableDebugMode(fun x -> x.DebugInformation |> printfn "Debug info %A") |> ignore
+        settings.DefaultIndex("dda") |> ignore
+        let client = new ElasticClient(settings);
+
+        client
+        |> FsNest.query<ElasticTypes.Task> "dda" "task" (fun () -> 
+            QueryContainer(MatchQuery(Field = Field("type"), Query = "практики" ))
+        ) |> FsNest.hits<ElasticTypes.Task>
+        |> Seq.iter (fun x -> x.Source |> printfn "%A")
         ()
