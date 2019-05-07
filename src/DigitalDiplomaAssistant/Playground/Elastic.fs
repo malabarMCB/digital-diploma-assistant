@@ -1,5 +1,6 @@
 namespace Tests
 
+open Common
 open DataAccess.Query
 open System
 open NUnit.Framework
@@ -32,11 +33,15 @@ module FsNest =
 
 [<TestClass>]
 type TestClass () =
+    let elasticUri = "Elastic:Uri" |> getEnvVariable
+    let elasticUserName = "Elastic:UserName" |> getEnvVariable
+    let elasticPassword = "Elastic:Password" |> getEnvVariable
+
     [<Test>]
     member __.ShouldGetDocsFromElastic () =
-        let node = new Uri("")
+        let node = new Uri(elasticUri)
         let settings = new ConnectionSettings(node);
-        settings.BasicAuthentication("","") |> ignore
+        settings.BasicAuthentication(elasticUserName,elasticPassword) |> ignore
         settings.EnableDebugMode(fun x -> x.DebugInformation |> printfn "Debug info %A") |> ignore
         settings.DefaultIndex("dda") |> ignore
         let client = new ElasticClient(settings);
@@ -69,13 +74,13 @@ type TestClass () =
 
     [<Test>]
     member __.ShouldReturnTasks () =
-        let node = new Uri("")
+        let node = new Uri(elasticUri)
         let settings = new ConnectionSettings(node);
 
         //this compiles but does not work
         //settings.DefaultMappingFor<DashboardQuery.Task>(FsNest.config<DashboardQuery.Task> (fun x -> x.IdProperty("Id") :> IClrTypeMapping<DashboardQuery.Task>)) |> ignore
 
-        settings.BasicAuthentication("","") |> ignore
+        settings.BasicAuthentication(elasticUserName, elasticPassword) |> ignore
         settings.EnableDebugMode(fun x -> x.DebugInformation |> printfn "Debug info %A") |> ignore
         settings.DefaultIndex("dda") |> ignore
         let client = ElasticClient(settings);

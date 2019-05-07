@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="PartialApplication.fs" />
     <Compile Include="Controllers/ValuesController.fs" />
     <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\DashboardController.fs" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.fsproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
   </ItemGroup>
 

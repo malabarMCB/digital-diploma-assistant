@@ -15,10 +15,10 @@
 
     <ItemGroup>
         <Compile Include="Elastic.fs" />
-        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Common\Common.fsproj" />
       <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
     </ItemGroup>
 

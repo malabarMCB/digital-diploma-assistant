@@ -1,8 +1,7 @@
 namespace Api.Controllers
 
 open Microsoft.AspNetCore.Mvc
-open DataAccess.Query
-open DataAccess
+open Api
 
 [<Route("[controller]")>]
 type DashboardController () =
@@ -10,5 +9,5 @@ type DashboardController () =
 
     [<HttpGet>]
     member this.Index() =
-        let items = DashboardQuery.getTasks
+        let items = getDashboardTasks
         this.View(items)
