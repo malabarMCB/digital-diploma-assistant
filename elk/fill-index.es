@@ -34,7 +34,7 @@ PUT dda/task/_mapping
       "type": "keyword"
     },
     "deadline": {
-      "type": "keyword"
+      "type": "date"
     }
   }
 }

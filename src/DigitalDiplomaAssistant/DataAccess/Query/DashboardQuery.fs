@@ -18,7 +18,7 @@ module DashboardQuery =
         Assignee: string
         Group: string
         Status: TaskStatus
-        Deadline: string
+        Deadline: DateTime
      }
 
      type TaskQueryFilterSearchTarget = 
