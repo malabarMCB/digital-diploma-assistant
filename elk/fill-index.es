@@ -41,4 +41,4 @@ PUT dda/task/_mapping
 
 POST _bulk
 { "index" : { "_index" : "dda", "_type" : "task" } }
-{"type": "Щоденник практики", "student": "Антон Солярик", "assignee": "Антон Солярик", "group": "БС-51", "status": "InProgress", "deadline": "no"}
+{"type": "Щоденник практики", "student": "Антон Солярик", "assignee": "Антон Солярик", "group": "БС-51", "status": "InProgress", "deadline": "2019-03-19"}
