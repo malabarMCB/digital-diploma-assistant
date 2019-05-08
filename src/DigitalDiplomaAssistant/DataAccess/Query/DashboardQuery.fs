@@ -50,10 +50,11 @@ module DashboardQuery =
     let getTasks (elasticOptions: ElasticOptions): Task seq =
         elasticOptions 
         |> FsNest.createElasticClient
-        |> FsNest.query<ElasticTypes.Task> "dda" "task" (fun () ->  QueryContainer(MatchAllQuery()))
+        |> FsNest.query<ElasticTypes.Task> "dda-task" (fun sd ->  QueryContainer(MatchAllQuery()))
         |> FsNest.hits<ElasticTypes.Task>
         |> Seq.map toDashboardTask
 
     let getFiletedTask (filter: TaskQueryFilter): Task list =
         []
+
         

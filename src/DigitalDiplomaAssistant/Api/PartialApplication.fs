@@ -4,6 +4,7 @@
 module PartialApplication = 
     open DataAccess
     open Common
+    open Authentication
     open DataAccess.Query
 
     let private options = {
@@ -13,3 +14,4 @@ module PartialApplication =
     }
     
     let getDashboardTasks = DashboardQuery.getTasks options
+    let authenticate = Authentication.authenticate (AuthenticationQuery.getUser options)

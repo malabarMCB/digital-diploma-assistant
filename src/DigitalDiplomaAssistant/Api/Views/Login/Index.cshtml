@@ -1,0 +1,33 @@
+﻿@model Api.Models.Login.LoginRequest
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <h2>Sign in</h2>
+
+    <!--<form asp-action="Login" asp-controller="Login" asp-anti-forgery="true">-->
+    <form asp-controller="Login" asp-anti-forgery="true" method="post">
+        <div class="validation" asp-validation-summary="ModelOnly" />
+        <div>
+            <div class="form-group">
+                <label>Login</label>
+                <input name="Email" asp-for="Email" type="text" />
+                <span asp-validation-for="Email" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input name="Password" asp-for="Password"/>
+                <span asp-validation-for="Password" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enter" class="btn" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
