@@ -4,7 +4,9 @@ namespace Authentication
 module Authentication =
     type GetUser = string -> string -> User option
 
-    let authenticate (getUser: GetUser) login password = 
+    type AuthenticationResult = Result<User, string>
+
+    let authenticate (getUser: GetUser) (login, password): AuthenticationResult = 
         match getUser login password with
         | Some user -> Ok user
-        | None -> Error (sprintf "There is no user with login= %s and password= %s" login password)
+        | None -> Error "There is no user with such login and password"

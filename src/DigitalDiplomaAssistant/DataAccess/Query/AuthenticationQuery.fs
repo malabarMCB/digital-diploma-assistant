@@ -31,10 +31,10 @@ module AuthenticationQuery =
                 FirstName = x.Source.FirstName
                 LastName = x.Source.LastName
                 Role = match x.Source.Role with
-                    | "student" -> Student
-                    | "scienceMaster" -> ScienceMaster
-                    | "metodist" -> Metodist
-                    | "normController" -> NormController
-                    | "unicheckManager" -> UnickeckManager
+                    | "student" -> UserRole.Student
+                    | "scienceMaster" -> UserRole.ScienceMaster
+                    | "metodist" -> UserRole.Metodist
+                    | "normController" -> UserRole.NormController
+                    | "unicheckManager" -> UserRole.UnickeckManager
             })
             

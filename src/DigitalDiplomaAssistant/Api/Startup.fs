@@ -10,6 +10,7 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.AspNetCore.Authentication.Cookies
+open Microsoft.AspNetCore.Http
 
 type Startup private () =
     new (configuration: IConfiguration) as this =
@@ -22,6 +23,8 @@ type Startup private () =
             options.LoginPath <- Microsoft.AspNetCore.Http.PathString("Login/Index")
             ())) |> ignore
         
+        services.AddTransient<IHttpContextAccessor, HttpContextAccessor> |> ignore
+
         // Add framework services.
         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1) |> ignore
 
