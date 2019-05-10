@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Models\Login.fs" />
+    <Compile Include="Models.fs" />
     <Compile Include="PartialApplication.fs" />
     <Compile Include="Controllers\LoginController.fs" />
     <Compile Include="Controllers/ValuesController.fs" />

@@ -1,8 +1,6 @@
 ﻿namespace Api.Controllers
 
 open Microsoft.AspNetCore.Mvc
-open Api
-open Api.Models
 
 [<Route("[controller]")>]
 type LoginController () =
@@ -13,8 +11,7 @@ type LoginController () =
         this.View()
 
     [<HttpPost>]
-    [<ValidateAntiForgeryToken>]
-    member this.Post([<FromForm>]login: Login.LoginRequest) = 
+    member this.Post(login: string, password: string) = 
         this.View("index")
 
 
