@@ -69,4 +69,4 @@ PUT dda-user/_doc/_mapping
 
 POST _bulk
 {"index": {"_index":"dda-user", "_type":"_doc","_id": "1"}}
-{"login":"login", "password": "123", "firsName": "Антон", "lastName":"Солярик", "role":"student"}
+{"login":"login", "password": "123", "firstName": "Антон", "lastName":"Солярик", "role":"student"}
