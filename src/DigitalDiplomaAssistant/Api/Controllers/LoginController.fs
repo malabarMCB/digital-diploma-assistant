@@ -18,7 +18,7 @@ type LoginController (httpContextAccessor: IHttpContextAccessor) =
             Claim(ClaimTypes.Surname, user.LastName)
             Claim(ClaimTypes.Role, user.Role.ToString())
         ]
-        let id = ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+        let id = ClaimsIdentity(claims, ClaimsIdentity.DefaultNameClaimType);
         httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id)) |> Async.AwaitTask
 
     [<HttpGet>]
@@ -26,9 +26,9 @@ type LoginController (httpContextAccessor: IHttpContextAccessor) =
         this.View()
 
     [<HttpPost>]
-    member this.Post(login: string, password: string) =     
+    member this.Post(login: string, password: string) =
         match authenticate(login, password) with
-        | Ok user -> user |> setAuthCookie |> ignore; this.View("dashboard")
-        | Error _ -> this.View("index")
+        | Ok user -> user |> setAuthCookie |> ignore; this.Redirect("dashboard") :> IActionResult
+        | Error _ -> this.View("index") :> IActionResult
 
 

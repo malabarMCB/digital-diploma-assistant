@@ -20,9 +20,10 @@ type Startup private () =
     // This method gets called by the runtime. Use this method to add services to the container.
     member this.ConfigureServices(services: IServiceCollection) =
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(Action<CookieAuthenticationOptions> (fun options -> 
-            options.LoginPath <- Microsoft.AspNetCore.Http.PathString("Login/Index")
+            options.LoginPath <- Microsoft.AspNetCore.Http.PathString("/Login")
             ())) |> ignore
         
+        services.AddHttpContextAccessor() |> ignore
         services.AddTransient<IHttpContextAccessor, HttpContextAccessor> |> ignore
 
         // Add framework services.
