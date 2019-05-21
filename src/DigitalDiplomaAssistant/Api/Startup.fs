@@ -35,6 +35,7 @@ type Startup private () =
             app.UseDeveloperExceptionPage() |> ignore
 
         app.UseAuthentication |> ignore
+        app.UseStaticFiles() |> ignore
         
         app.UseMvc(fun routes ->
             routes.MapRoute("default", "{controller=Dashboard}/{action=Index}/{id?}") |> ignore
