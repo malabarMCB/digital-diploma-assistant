@@ -1,6 +1,5 @@
-DELETE dda
-
-PUT dda
+DELETE dda-task
+PUT dda-task
 PUT dda-task/_doc/_mapping
 {
     "properties": {
@@ -106,6 +105,11 @@ PUT dda-task/_doc/_mapping
 POST _bulk
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
 {"type": "Щоденник практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "InProgress", "deadline": "2019-03-19"}
+{ "index" : { "_index" : "dda-task", "_type" : "_doc" } }
+{"type": "Звіт з практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
+{ "index" : { "_index" : "dda-task", "_type" : "_doc" } }
+{"type": "Відгук керівника", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
+
 
 DELETE dda-user
 PUT dda-user
