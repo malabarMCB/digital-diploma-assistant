@@ -19,6 +19,7 @@ module DashboardQuery =
         Group: string
         Status: TaskStatus
         Deadline: DateTime
+        ScienceMaster: string
      }
 
      type TaskQueryFilterSearchTarget = 
@@ -36,8 +37,9 @@ module DashboardQuery =
         {
             Id = hit.Id
             Type = hit.Source.Type
-            Student = hit.Source.Student
-            Assignee = hit.Source.Assignee
+            Student = hit.Source.Student.FirstName + " " + hit.Source.Student.LastName
+            Assignee = hit.Source.Assignee.FirstName + " " + hit.Source.Assignee.LastName
+            ScienceMaster = hit.Source.ScienceMaster.FirstName + " " + hit.Source.ScienceMaster.LastName
             Group = hit.Source.Group
             Deadline = hit.Source.Deadline
             Status = match hit.Source.Status with

@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@model IEnumerable<DataAccess.Query.DashboardQuery.Task>
+
+<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -7,131 +9,146 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Головна сторiнка</title>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>DDA| Dashboard</title>
 </head>
 <body>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 
-        <a class="navbar-brand" href="#">Digital Diploma Assistant v0.1</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <a class="navbar-brand" href="#">Digital Diploma Assistant v0.1</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        Дешборд <span class="sr-only">(current)</span><span class="badge badge-secondary">Нове!</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Завдання</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Розширенi опцii
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Редагувати внутрiшнi параметри системи</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Вихiд з системи</a>
-                    </div>
-                </li>
-
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0">
-                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-info">Розширений пошук</button>
-                    </div>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-primary" type="submit">Пошук</button>
-                        <br>
-                    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    Дешборд <span class="sr-only">(current)</span><span class="badge badge-secondary">Нове!</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Завдання</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Розширенi опцii
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Редагувати внутрiшнi параметри системи</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Вихiд з системи</a>
                 </div>
-            </form>
-        </div>
-    </nav>
+            </li>
 
-    <div class="jumbotron">
-        <h1 class="display-4">Вiтаю!</h1>
-        <p class="lead">Це тестова версiя системи цифрового контролю роботи над дипломами.</p>
-        <hr class="my-4">
-        <div class="alert alert-primary" role="alert">
-            Увага! Це тестова версiя, що може працювати нестабiльно та не може бути фiнальним продуктом.
-        </div>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-info">Розширений пошук</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Пошук</button>
+                    <br>
+                </div>
+            </div>
+        </form>
     </div>
+</nav>
+
+<div class="jumbotron">
+    <h1 class="display-4">Вiтаю!</h1>
+    <p class="lead">Це тестова версiя системи цифрового контролю роботи над дипломами.</p>
+    <hr class="my-4">
+    <div class="alert alert-primary" role="alert">
+        Увага! Це тестова версiя, що може працювати нестабiльно та не може бути фiнальним продуктом.
+    </div>
+</div>
 <div class="container">
 
     <form>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
 
-                <ul class="list-group">
-                    <h2>Новi об`екти </h2>
+                    <ul class="list-group">
+                        <h2>Треба зробити </h2>
+                        @foreach (var task in Model)
+                        {
+                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.ToDo)
+                            {
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@task.Type</h5>
+                                        <h6 class="card-subtitle mb-2 text">Студент: @task.Student</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дипрук: @task.ScienceMaster</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Група: @task.Group </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Назначений: @task.Assignee </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дедлайн: @task.Deadline.ToString("dd.MM.yyyy")</h6>
+                                        <a href="#" class="card-link">Детальнiше</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </ul>
 
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Бобек ТявТяв</h5>
-                            <h6 class="card-subtitle mb-2 text">БС-51</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Зараз робить: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Статус: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дедлайн: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дипрук: </h6>
-                            <a href="#" class="card-link">Детальнiше</a>
-                        </div>
-                    </div>
-
-                </ul>
-
-            </div>
-            <div class="col-sm">
-                <ul class="list-group">
-                    <h2>У роботi</h2>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Бобек ТявТяв</h5>
-                            <h6 class="card-subtitle mb-2 text">БС-51</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Зараз робить: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Статус: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дедлайн: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дипрук: </h6>
-                            <a href="#" class="card-link">Детальнiше</a>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-            <div class="col-sm">
-                <ul class="list-group">
-                    <h2>Завершено </h2>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Бобек ТявТяв</h5>
-                            <h6 class="card-subtitle mb-2 text">БС-51</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Зараз робить: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Статус: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дедлайн: </h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Дипрук: </h6>
-                            <a href="#" class="card-link">Детальнiше</a>
-                        </div>
-                    </div>
-                </ul>
+                </div>
+                <div class="col-sm">
+                    <ul class="list-group">
+                        <h2>У роботi</h2>
+                        @foreach (var task in Model)
+                        {
+                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.InProgress)
+                            {
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@task.Type</h5>
+                                        <h6 class="card-subtitle mb-2 text">Студент: @task.Student</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дипрук: @task.ScienceMaster</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Група: @task.Group </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Назначений: @task.Assignee </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дедлайн: @task.Deadline.ToString("dd.MM.yyyy")</h6>
+                                        <a href="#" class="card-link">Детальнiше</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <ul class="list-group">
+                        <h2>Завершено </h2>
+                        @foreach (var task in Model)
+                        {
+                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.Done)
+                            {
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@task.Type</h5>
+                                        <h6 class="card-subtitle mb-2 text">Студент: @task.Student</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дипрук: @task.ScienceMaster</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Група: @task.Group </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Назначений: @task.Assignee </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Дедлайн: @task.Deadline.ToString("dd.MM.yyyy")</h6>
+                                        <a href="#" class="card-link">Детальнiше</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </form>
-</div>
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</div>         
 </body>
 </html>

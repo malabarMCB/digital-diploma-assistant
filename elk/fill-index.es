@@ -3,45 +3,109 @@ DELETE dda
 PUT dda
 PUT dda-task/_doc/_mapping
 {
-  "properties": {
-    "type":{
-      "type": "keyword"
-    },
-    "student":{
-      "type": "text",
-      "analyzer": "ukrainian",
-      "fields" : {
-        "keyword" : {
-          "type" : "keyword",
-          "ignore_above" : 256
+    "properties": {
+        "type": {
+            "type": "keyword"
+        },
+        "student": {
+            "type": "nested",
+            "properties": {
+                "id": {
+                    "type": "keyword"
+                },
+                "firstName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "lastName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        },
+        "assignee": {
+            "type": "nested",
+            "properties": {
+                "id": {
+                    "type": "keyword"
+                },
+                "firstName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "lastName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        },
+        "scienceMaster": {
+            "type": "nested",
+            "properties": {
+                "id": {
+                    "type": "keyword"
+                },
+                "firstName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "lastName": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        },
+        "group": {
+            "type": "keyword"
+        },
+        "status": {
+            "type": "keyword"
+        },
+        "deadline": {
+            "type": "date"
         }
-      }
-    },
-    "assignee": {
-      "type": "text",
-      "analyzer": "ukrainian",
-      "fields" : {
-        "keyword" : {
-          "type" : "keyword",
-          "ignore_above" : 256
-        }
-      }
-    },
-    "group": {
-      "type": "keyword"
-    },
-    "status": {
-      "type": "keyword"
-    },
-    "deadline": {
-      "type": "date"
     }
-  }
 }
 
 POST _bulk
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Щоденник практики", "student": "Антон Солярик", "assignee": "Антон Солярик", "group": "БС-51", "status": "InProgress", "deadline": "2019-03-19"}
+{"type": "Щоденник практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "InProgress", "deadline": "2019-03-19"}
 
 DELETE dda-user
 PUT dda-user
