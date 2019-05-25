@@ -1,3 +1,3 @@
 # digital-diploma-assistant
 
-Here will be some magic soon...
+Control, accounting and automation system  for diploma business processes designing written in F#, ASP.NET Core MVC and Elasticsearch
