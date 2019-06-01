@@ -14,5 +14,5 @@ type DashboardController (httpContextAccessor: IHttpContextAccessor) =
     [<HttpGet>]
     member this.Index() =
         let user = httpContextAccessor.HttpContext.User
-        let items = getDashboardTasks
+        let items = getDashboardTasks()
         this.View(items)

@@ -4,8 +4,6 @@
 module PartialApplication = 
     open DataAccess
     open Common
-    open Authentication
-    open DataAccess.Query
 
     let private options = {
         Uri = "Elastic:Uri" |> getEnvVariable
@@ -13,5 +11,5 @@ module PartialApplication =
         Password = "Elastic:Password" |> getEnvVariableOption
     }
     
-    let getDashboardTasks = DashboardQuery.getTasks options
-    let authenticate = Authentication.authenticate (AuthenticationQuery.getUser options)
+    let getDashboardTasks () = options |> DataAccess.Dashboard.Queries.getTasks |> Domain.Dashboard.Flows.getTasks
+    let authenticate = options |> DataAccess.Authentication.Queries.getUser |> Authentication.Authentication.authenticate

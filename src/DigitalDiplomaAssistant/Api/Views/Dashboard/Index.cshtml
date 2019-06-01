@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DataAccess.Query.DashboardQuery.Task>
+﻿@model IEnumerable<Domain.Dashboard.PublicTypes.Task>
+@using TaskStatus = Domain.Dashboard.PublicTypes.TaskStatus
 
 <!doctype html>
 <html lang="en">
@@ -84,20 +85,20 @@
                         <h2>Треба зробити </h2>
                         @foreach (var task in Model)
                         {
-                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.ToDo)
-                            {
-                                <div class="card" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@task.Type</h5>
-                                        <h6 class="card-subtitle mb-2 text">Студент: @task.Student</h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">Дипрук: @task.ScienceMaster</h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">Група: @task.Group </h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">Назначений: @task.Assignee </h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">Дедлайн: @task.Deadline.ToString("dd.MM.yyyy")</h6>
-                                        <a href="#" class="card-link">Детальнiше</a>
-                                    </div>
-                                </div>
-                            }
+                        if (task.Status == TaskStatus.ToDo)
+                        {
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@task.Type</h5>
+                                <h6 class="card-subtitle mb-2 text">Студент: @task.Student</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Дипрук: @task.ScienceMaster</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Група: @task.Group </h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Назначений: @task.Assignee </h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Дедлайн: @task.Deadline.ToString("dd.MM.yyyy")</h6>
+                                <a href="#" class="card-link">Детальнiше</a>
+                            </div>
+                        </div>
+                        }
                         }
                     </ul>
 
@@ -107,7 +108,7 @@
                         <h2>У роботi</h2>
                         @foreach (var task in Model)
                         {
-                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.InProgress)
+                            if (task.Status == TaskStatus.InProgress)
                             {
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
@@ -129,7 +130,7 @@
                         <h2>Завершено </h2>
                         @foreach (var task in Model)
                         {
-                            if (task.Status == DataAccess.Query.DashboardQuery.TaskStatus.Done)
+                            if (task.Status == TaskStatus.Done)
                             {
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">

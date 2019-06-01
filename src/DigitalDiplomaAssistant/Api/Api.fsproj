@@ -21,8 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Authentication\Authentication.fsproj" />
     <ProjectReference Include="..\Common\Common.fsproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
+    <ProjectReference Include="..\Domain\Domain.fsproj" />
   </ItemGroup>
 
 </Project>

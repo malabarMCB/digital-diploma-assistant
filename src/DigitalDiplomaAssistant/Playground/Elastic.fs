@@ -1,11 +1,10 @@
 ﻿namespace Tests
 
 open Common
-open DataAccess.Query
 open System
 open NUnit.Framework
 open Nest
-open DataAccess.Types
+open DataAccess.Dashboard
 
 type Data = {
         Name: string
@@ -86,11 +85,11 @@ type TestClass () =
         settings.DefaultIndex("dda") |> ignore
         let client = ElasticClient(settings);
 
-        let search = client |> FsNest.query<ElasticTypes.Task> "dda" "task" (fun () -> 
+        let search = client |> FsNest.query<Task> "dda" "task" (fun () -> 
             let query = QueryContainer(MatchAllQuery())
             query
             ) 
-        search.Hits |> Seq.cast<IHit<ElasticTypes.Task>> |> Seq.iter( fun x -> x.Source |> printfn "%A")
+        search.Hits |> Seq.cast<IHit<Task>> |> Seq.iter( fun x -> x.Source |> printfn "%A")
         search.Documents |> printfn "%A"
         ()
 
@@ -104,8 +103,8 @@ type TestClass () =
         let client = new ElasticClient(settings);
 
         client
-        |> FsNest.query<ElasticTypes.Task> "dda" "task" (fun () -> 
+        |> FsNest.query<Task> "dda" "task" (fun () -> 
             QueryContainer(MatchQuery(Field = Field("type"), Query = "практики" ))
-        ) |> FsNest.hits<ElasticTypes.Task>
+        ) |> FsNest.hits<Task>
         |> Seq.iter (fun x -> x.Source |> printfn "%A")
         ()

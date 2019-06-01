@@ -5,7 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Library.fs" />
+        <Compile Include="Dashboard\DashboardPublicTypes.fs" />
+        <Compile Include="Dashboard\DashboardFlows.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
     </ItemGroup>
 
 </Project>

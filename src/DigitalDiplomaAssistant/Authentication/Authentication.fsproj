@@ -9,4 +9,8 @@
     <Compile Include="Authentication.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
+  </ItemGroup>
+
 </Project>

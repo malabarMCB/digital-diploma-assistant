@@ -6,18 +6,15 @@
 
     <ItemGroup>
       <Compile Include="ElasticConfig.fs" />
-      <Compile Include="ElasticTypes.fs" />
       <Compile Include="FsNest.fs" />
-      <Compile Include="Query\AuthenticationQuery.fs" />
-      <Compile Include="Query\DashboardQuery.fs" />
+      <Compile Include="Authentication\AuthenticationPublicTypes.fs" />
+      <Compile Include="Authentication\AuthenticationQueries.fs" />
+      <Compile Include="Dashboard\DashboardPublicTypes.fs" />
+      <Compile Include="Dashboard\DashboardQueries.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="NEST" Version="6.6.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Authentication\Authentication.fsproj" />
     </ItemGroup>
 
 </Project>
