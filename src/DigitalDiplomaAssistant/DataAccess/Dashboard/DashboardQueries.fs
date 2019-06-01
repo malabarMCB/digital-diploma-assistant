@@ -7,7 +7,7 @@ module Queries =
     open DataAccess.Dashboard;
 
     let private setTaskId (hit: IHit<Task>): Task = 
-        {hit.Source with Id = hit.Source.Id}
+        {hit.Source with Id = hit.Id}
 
     let getTasks (elasticOptions: ElasticOptions): Task seq =
     elasticOptions 
