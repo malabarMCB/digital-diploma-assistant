@@ -1,6 +1,6 @@
 ﻿namespace DataAccess
 
-module internal FsNest = 
+module FsNest = 
     open System
     open Nest
 

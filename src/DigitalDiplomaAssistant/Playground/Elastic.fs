@@ -4,7 +4,8 @@ open Common
 open System
 open NUnit.Framework
 open Nest
-open DataAccess.Dashboard
+open Queries
+open Queries.Dashboard
 
 type Data = {
         Name: string
@@ -85,11 +86,11 @@ type TestClass () =
         settings.DefaultIndex("dda") |> ignore
         let client = ElasticClient(settings);
 
-        let search = client |> FsNest.query<Task> "dda" "task" (fun () -> 
+        let search = client |> FsNest.query<ElasticTask> "dda" "task" (fun () -> 
             let query = QueryContainer(MatchAllQuery())
             query
             ) 
-        search.Hits |> Seq.cast<IHit<Task>> |> Seq.iter( fun x -> x.Source |> printfn "%A")
+        search.Hits |> Seq.cast<IHit<ElasticTask>> |> Seq.iter( fun x -> x.Source |> printfn "%A")
         search.Documents |> printfn "%A"
         ()
 
@@ -103,8 +104,8 @@ type TestClass () =
         let client = new ElasticClient(settings);
 
         client
-        |> FsNest.query<Task> "dda" "task" (fun () -> 
+        |> FsNest.query<ElasticTask> "dda" "task" (fun () -> 
             QueryContainer(MatchQuery(Field = Field("type"), Query = "практики" ))
-        ) |> FsNest.hits<Task>
+        ) |> FsNest.hits<ElasticTask>
         |> Seq.iter (fun x -> x.Source |> printfn "%A")
         ()

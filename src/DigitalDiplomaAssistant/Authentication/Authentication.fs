@@ -2,11 +2,11 @@ namespace Authentication
 
 [<AutoOpen>]
 module Authentication =
-    type GetUser = string -> string -> DataAccess.Authentication.PublicTypes.User option
+    type GetUser = string -> string -> Queries.Authentication.PublicTypes.User option
 
     type AuthenticationResult = Result<User, string>
 
-    let private toUser (dbUser: DataAccess.Authentication.PublicTypes.User): User = 
+    let private toUser (dbUser: Queries.Authentication.PublicTypes.User): User = 
         {
                 Id = dbUser.Id
                 Login = dbUser.Login

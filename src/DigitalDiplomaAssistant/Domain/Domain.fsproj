@@ -4,13 +4,4 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Compile Include="Dashboard\DashboardPublicTypes.fs" />
-        <Compile Include="Dashboard\DashboardFlows.fs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
-    </ItemGroup>
-
 </Project>

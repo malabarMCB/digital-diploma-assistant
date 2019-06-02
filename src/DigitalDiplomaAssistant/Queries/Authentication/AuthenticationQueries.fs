@@ -1,10 +1,11 @@
-﻿namespace DataAccess.Authentication
+﻿namespace Queries.Authentication
 
 [<AutoOpen>]
 module Queries = 
     open DataAccess
     open Nest
-    open System
+    open Queries.Authentication;
+    open System;
 
     let private  setUserId (hit: IHit<User>): User = 
         {hit.Source with Id = hit.Id}

@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Authentication
+﻿namespace Queries.Authentication
 
 [<AutoOpen>]
 module PublicTypes = 
@@ -9,3 +9,4 @@ module PublicTypes =
         LastName: string
         Role: string
     }
+

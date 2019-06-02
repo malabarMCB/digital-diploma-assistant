@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Models.fs" />
     <Compile Include="PartialApplication.fs" />
+    <Compile Include="Controllers\TaskController.fs" />
     <Compile Include="Controllers\LoginController.fs" />
     <Compile Include="Controllers/ValuesController.fs" />
     <Compile Include="Controllers\HomeController.fs" />
@@ -23,8 +24,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Authentication\Authentication.fsproj" />
     <ProjectReference Include="..\Common\Common.fsproj" />
-    <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
     <ProjectReference Include="..\Domain\Domain.fsproj" />
+    <ProjectReference Include="..\Queries\Queries.fsproj" />
   </ItemGroup>
 
 </Project>

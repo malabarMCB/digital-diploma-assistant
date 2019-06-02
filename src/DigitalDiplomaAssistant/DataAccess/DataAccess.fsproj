@@ -7,10 +7,6 @@
     <ItemGroup>
       <Compile Include="ElasticConfig.fs" />
       <Compile Include="FsNest.fs" />
-      <Compile Include="Authentication\AuthenticationPublicTypes.fs" />
-      <Compile Include="Authentication\AuthenticationQueries.fs" />
-      <Compile Include="Dashboard\DashboardPublicTypes.fs" />
-      <Compile Include="Dashboard\DashboardQueries.fs" />
     </ItemGroup>
 
     <ItemGroup>
