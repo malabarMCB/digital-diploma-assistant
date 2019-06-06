@@ -14,10 +14,10 @@ module Authentication =
                 LastName = dbUser.LastName
                 Role = match dbUser.Role with
                     | "student" -> UserRole.Student
-                    | "scienceMaster" -> UserRole.ScienceMaster
+                    | "supervisor" -> UserRole.Supervisor
                     | "metodist" -> UserRole.Metodist
                     | "normController" -> UserRole.NormController
-                    | "unicheckManager" -> UserRole.UnickeckManager
+                    | "unicheckValidator" -> UserRole.UnickeckValidator
             }
 
     let authenticate (getUser: GetUser) (login, password): AuthenticationResult = 

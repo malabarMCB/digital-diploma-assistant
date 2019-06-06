@@ -10,7 +10,7 @@ module PublicTypes =
         Type: string
         Student: Student
         Assignee: Assignee
-        ScienceMaster: ScienceMaster
+        Supervisor: Supervisor
         Group: string
         Status: string
         Deadline: DateTime
@@ -24,6 +24,6 @@ module PublicTypes =
         Group: string
         Status: TaskStatus
         Deadline: DateTime
-        ScienceMaster: string
+        Supervisor: string
     }
 

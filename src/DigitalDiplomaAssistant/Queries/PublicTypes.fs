@@ -16,7 +16,7 @@ module PublicTypes =
     }
 
     type Student = Person
-    type ScienceMaster = Person
+    type Supervisor = Person
     type Assignee = Person
 
     type Attachment = {
