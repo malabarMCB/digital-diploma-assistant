@@ -1,4 +1,4 @@
-﻿namespace Queries
+﻿namespace Domain
 
 [<AutoOpen>]
 module PublicTypes = 

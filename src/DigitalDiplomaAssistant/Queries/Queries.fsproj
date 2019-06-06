@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="PublicTypes.fs" />
     <Compile Include="Dashboard\DashboardPublicTypes.fs" />
     <Compile Include="Dashboard\DashboardQueries.fs" />
     <Compile Include="Task\TaskPublicTypes.fs" />
@@ -16,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
+    <ProjectReference Include="..\Domain\Domain.fsproj" />
   </ItemGroup>
 
 </Project>

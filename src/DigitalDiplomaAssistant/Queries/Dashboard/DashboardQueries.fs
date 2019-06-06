@@ -3,13 +3,15 @@
 [<AutoOpen>]
 module Queries = 
     open Nest;
-    open DataAccess;
-    open Queries
+    open DataAccess
+    open Queries.Dashboard
+    open Domain
+
 
     let private setElasticTaskId (hit: IHit<ElasticTask>): ElasticTask = 
         {hit.Source with Id = hit.Id}
 
-    let private toTask (task: ElasticTask): Task = 
+    let private toTask (task: ElasticTask): DashboardPublicTypes.Task = 
         {
             Id = task.Id
             Type = task.Type
@@ -24,7 +26,7 @@ module Queries =
                 | "Done" -> TaskStatus.Done
         } 
 
-    let getTasks (elasticOptions: ElasticOptions): Task seq =
+    let getTasks (elasticOptions: ElasticOptions): DashboardPublicTypes.Task seq =
     elasticOptions 
     |> FsNest.createElasticClient
     |> FsNest.query<ElasticTask> "dda-task" (fun sd ->  QueryContainer(MatchAllQuery()))

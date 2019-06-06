@@ -1,18 +1,16 @@
-﻿namespace Queries.Task
+﻿namespace Domain
 
-[<AutoOpen>]
-module PublicTypes = 
+module TaskPublicTypes = 
     open System
-    open Domain
 
-    type ElasticTask = {
+    type Task = {
         Id: string
         Type: string
         Student: Student
         Assignee: Assignee
         Supervisor: Supervisor
         Group: string
-        Status: string
+        Status: TaskStatus
         Deadline: DateTime
         Description: Description
         Comments: Comment list

@@ -4,12 +4,13 @@
 module Queries = 
     open Nest;
     open DataAccess;
-    open Queries
+    open Queries.Task
+    open Domain
 
     let private setElasticTaskId (hit: IHit<ElasticTask>): ElasticTask = 
         {hit.Source with Id = hit.Id}
 
-    let private toTask (task: ElasticTask): Task = 
+    let private toTask (task: ElasticTask): Domain.TaskPublicTypes.Task = 
         {
             Id = task.Id
             Type = task.Type
@@ -26,7 +27,7 @@ module Queries =
             Comments = task.Comments
         }
     
-    let getTaskById (elasticOptions: ElasticOptions) (id: string): Task option = 
+    let getTaskById (elasticOptions: ElasticOptions) (id: string): Domain.TaskPublicTypes.Task option = 
         elasticOptions
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
