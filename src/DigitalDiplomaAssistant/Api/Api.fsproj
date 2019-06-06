@@ -9,8 +9,6 @@
     <Compile Include="PartialApplication.fs" />
     <Compile Include="Controllers\TaskController.fs" />
     <Compile Include="Controllers\LoginController.fs" />
-    <Compile Include="Controllers/ValuesController.fs" />
-    <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\DashboardController.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
