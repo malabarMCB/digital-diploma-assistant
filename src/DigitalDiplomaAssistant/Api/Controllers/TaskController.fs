@@ -6,13 +6,14 @@ open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Authentication.Cookies;
 
 [<Route("[controller]")>]
-[<Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)>]
+//[<Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)>]
 type TaskController() = 
     inherit Controller()
 
     [<HttpGet>]
-    member this.Get(id: string) = 
-        this.View()
+    member this.Index() = 
+        let task = "GJZPLGsB2N0LygMFURhw" |> getTaskById |> Option.get
+        this.View(task)
         
 
 

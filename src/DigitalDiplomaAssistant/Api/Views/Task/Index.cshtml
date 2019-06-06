@@ -1,15 +1,16 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model Queries.Task.PublicTypes.Task
+@using TaskStatus = Queries.PublicTypes.TaskStatus
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>DDA| Task</title>
 </head>
 <body>
+    @{
+        <div>@Model.ToString()</div>
+    }
 </body>
 </html>

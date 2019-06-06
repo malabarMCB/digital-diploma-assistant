@@ -62,7 +62,7 @@ PUT dda-task/_doc/_mapping
                 }
             }
         },
-        "scienceMaster": {
+        "supervisor": {
             "type": "nested",
             "properties": {
                 "id": {
@@ -98,17 +98,96 @@ PUT dda-task/_doc/_mapping
         },
         "deadline": {
             "type": "date"
+        },
+        "comments": {
+            "type": "nested",
+            "properties": {
+                "author": {
+                    "type": "nested",
+                    "properties": {
+                        "id": {
+                            "type": "keyword"
+                        },
+                        "firstName": {
+                            "type": "text",
+                            "analyzer": "ukrainian",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "lastName": {
+                            "type": "text",
+                            "analyzer": "ukrainian",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "text": {
+                    "type": "text",
+                    "analyzer": "ukrainian",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "postDate": {
+                    "type": "date"
+                },
+                "attachments": {
+                    "type": "nested",
+                    "properties": {
+                        "name": {
+                            "type": "keyword"
+                        },
+                        "filePath": {
+                            "type": "keyword"
+                        },
+                        "uploadDate": {
+                            "type": "date"
+                        }
+                    }
+                }
+            }
+        },
+        "description": {
+            "properties": {
+                "text": {
+                    "type": "text"
+                },
+                "attachments": {
+                    "properties": {
+                        "name": {
+                            "type": "keyword"
+                        },
+                        "filePath": {
+                            "type": "keyword"
+                        },
+                        "uploadDate": {
+                            "type": "date"
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 POST _bulk
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Щоденник практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "InProgress", "deadline": "2019-03-19"}
+{"type":"Щоденник практики","student":{"id":"aa","firstName":"Антон","lastName":"Солярик"},"assignee":{"id":"aa","firstName":"Антон","lastName":"Солярик"},"supervisor":{"id":"bbb","firstName":"Альона","lastName":"Яковенко"},"group":"БС-51","status":"InProgress","deadline":"2019-03-19","comments":[{"author":{"id":1,"firstName":"Антон","lastName":"Солярик"},"text":"very awesome comment","postDate":"2019-05-12","attachments":[{"name":"my diploma.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-12"}]},{"author":{"id":1,"firstName":"Антон","lastName":"Солярик"},"text":"another awesome comment","postDate":"2019-05-15","attachments":[{"name":"my diploma(2).docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}],"description":{"text":"perfect explanations","attachments":[{"name":"sample1.docx","filePath":"C:\\dda-storage","uploadDate":"2019-01-10"},{"name":"sample2.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}}{ "index" : { "_index" : "dda-task", "_type" : "_doc" } }
+{"type": "Звіт з практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "supervisor": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Звіт з практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
-{ "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Відгук керівника", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "scienceMaster": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
+{"type": "Відгук керівника", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "supervisor": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "ToDo", "deadline": "2019-03-19"}
 
 
 DELETE dda-user
