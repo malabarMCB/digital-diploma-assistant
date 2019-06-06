@@ -6,6 +6,7 @@ open NUnit.Framework
 open Nest
 open Queries
 open Queries.Dashboard
+open DataAccess
 
 type Data = {
         Name: string
@@ -16,20 +17,8 @@ type Data = {
         Type: string
 }
 
-module FsNest = 
-    open Nest
-
-    let query<'T when 'T: not struct>  indexName typeName (f:(unit -> QueryContainer)) (elasticClient: ElasticClient)= 
-        elasticClient.Search<'T>(fun (s: SearchDescriptor<'T>) -> 
-            let index = Indices.Parse(indexName)
-            let types = Types.Parse(typeName)
-            let request = SearchRequest(index, types)
-            request.Query <- f()
-            request :> ISearchRequest
-        )
-
-    let hits<'T when 'T: not struct> (query: ISearchResponse<'T>) = 
-        query.Hits |> Seq.cast<IHit<'T>>
+type A () = class end
+type B () = class end
 
 
 [<TestClass>]
@@ -86,7 +75,7 @@ type TestClass () =
         settings.DefaultIndex("dda") |> ignore
         let client = ElasticClient(settings);
 
-        let search = client |> FsNest.query<ElasticTask> "dda" "task" (fun () -> 
+        let search = client |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             let query = QueryContainer(MatchAllQuery())
             query
             ) 
@@ -104,8 +93,25 @@ type TestClass () =
         let client = new ElasticClient(settings);
 
         client
-        |> FsNest.query<ElasticTask> "dda" "task" (fun () -> 
+        |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             QueryContainer(MatchQuery(Field = Field("type"), Query = "практики" ))
         ) |> FsNest.hits<ElasticTask>
         |> Seq.iter (fun x -> x.Source |> printfn "%A")
+        ()
+
+    [<Test>]
+    member __.AddCommentScenario () =
+        let node = new Uri(elasticUri)
+        let settings = new ConnectionSettings(node);
+        settings.BasicAuthentication(elasticUserName,elasticPassword) |> ignore
+        let client = ElasticClient(settings)
+        
+        //let indexName = IndexName.op_Implicit "dda-task"
+        //let typeName = TypeName.op_Implicit "_doc"
+        //let id = Id.op_Implicit ""
+        //let updateRequest = new UpdateRequest<Queries.Task.PublicTypes.ElasticTask, Queries.PublicTypes.Comment>(indexName, typeName, id)
+        //updateRequest.Script = new Scriptbas() :> IScript
+        //()
+        let postData = Elasticsearch.Net.PostData.op_Implicit "{\"script\":{\"lang\":\"painless\",\"inline\":\"ctx._source.comments.add(params.comment)\",\"params\":{\"comment\":{\"text\":\"yoo\"}}}}"
+        let result = client.LowLevel.Update<Elasticsearch.Net.DynamicResponse>("dda-task", "_doc", "GJZPLGsB2N0LygMFURhw", postData)
         ()
