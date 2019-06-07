@@ -134,7 +134,9 @@
                     <div class="list-group">
                         @foreach (var status in @Model.AvaliableStatuses)
                         {
-                            <button type="button" class="btn btn-light">@status</button>
+                            <form action ="task/@Model.Id/status" method="post">
+                                <button name="status" value="@status" class="btn btn-light" type="submit">@status</button>
+                            </form>
                             <br>
                         }
                     </div>
