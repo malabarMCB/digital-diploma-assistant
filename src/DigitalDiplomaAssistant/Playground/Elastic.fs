@@ -20,6 +20,20 @@ type Data = {
 type A () = class end
 type B () = class end
 
+type Script<'T> = {
+    Lang: string
+    Inline: string
+    Params: 'T
+}
+
+type Update<'T> = {
+    Script: Script<'T>
+}
+
+type CommentParam = {
+    Comment: Domain.PublicTypes.Comment
+}
+
 
 [<TestClass>]
 type TestClass () =
@@ -106,12 +120,43 @@ type TestClass () =
         settings.BasicAuthentication(elasticUserName,elasticPassword) |> ignore
         let client = ElasticClient(settings)
         
+        //this not work
         //let indexName = IndexName.op_Implicit "dda-task"
         //let typeName = TypeName.op_Implicit "_doc"
         //let id = Id.op_Implicit ""
         //let updateRequest = new UpdateRequest<Queries.Task.PublicTypes.ElasticTask, Queries.PublicTypes.Comment>(indexName, typeName, id)
         //updateRequest.Script = new Scriptbas() :> IScript
         //()
-        let postData = Elasticsearch.Net.PostData.op_Implicit "{\"script\":{\"lang\":\"painless\",\"inline\":\"ctx._source.comments.add(params.comment)\",\"params\":{\"comment\":{\"text\":\"yoo\"}}}}"
+
+        //this works
+        //let postData = Elasticsearch.Net.PostData.op_Implicit "{\"script\":{\"lang\":\"painless\",\"inline\":\"ctx._source.comments.add(params.comment)\",\"params\":{\"comment\":{\"text\":\"yoo\"}}}}"
+
+        //this works too
+        let update = {
+            Script = {
+                Lang = "painless"
+                Inline = "ctx._source.comments.add(params.comment)"
+                Params = {
+                    Comment = {
+                        Author= {
+                            Id = "test id"
+                            FirstName = "ddd"
+                            LastName = "bbb"
+                        }
+                        Text = "some text 4 comment"
+                        PostDate = System.DateTime.UtcNow
+                        Attachments = [
+                        {
+                            Name = "file1"
+                            FilePath = "C:"
+                            UploadDate = System.DateTime.UtcNow
+                        }
+                        ]
+                    }
+                }
+            } 
+        } 
+
+        let postData = Elasticsearch.Net.PostData.Serializable update
         let result = client.LowLevel.Update<Elasticsearch.Net.DynamicResponse>("dda-task", "_doc", "GJZPLGsB2N0LygMFURhw", postData)
         ()
