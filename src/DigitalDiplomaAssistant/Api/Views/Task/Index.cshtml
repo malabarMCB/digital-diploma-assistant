@@ -132,11 +132,11 @@
                 </div>
                 <div class="col col-lg-2">
                     <div class="list-group">
-                        <button type="button" class="btn btn-light">TODO</button>
-                        <br>
-                        <button type="button" class="btn btn-light">В процессi</button>
-                        <br>
-                        <button type="button" class="btn btn-light">Готово</button>
+                        @foreach (var status in @Model.AvaliableStatuses)
+                        {
+                            <button type="button" class="btn btn-light">@status</button>
+                            <br>
+                        }
                     </div>
                 </div>
             </div>

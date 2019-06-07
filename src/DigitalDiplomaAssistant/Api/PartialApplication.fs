@@ -5,6 +5,7 @@ module PartialApplication =
     open DataAccess
     open Common
     open Queries
+    open Domain
 
     let private options = {
         Uri = "Elastic:Uri" |> getEnvVariable
@@ -14,4 +15,5 @@ module PartialApplication =
     
     let getDashboardTasks () = options |> Dashboard.Queries.getTasks
     let authenticate = options |> Authentication.Queries.getUser |> Authentication.Authentication.authenticate
-    let getTaskById = options |> Task.Queries.getTaskById
+    let getTaskById (id: string) : TaskPublicTypes.Task option = Task.Queries.getTaskById Task.getAvaliableStatuses options id
+    

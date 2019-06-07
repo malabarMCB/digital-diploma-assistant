@@ -5,12 +5,18 @@ module Queries =
     open Nest;
     open DataAccess;
     open Queries.Task
-    open Domain
+    open Domain.Task
+    open Domain.TaskPublicTypes
 
     let private setElasticTaskId (hit: IHit<ElasticTask>): ElasticTask = 
         {hit.Source with Id = hit.Id}
 
-    let private toTask (task: ElasticTask): Domain.TaskPublicTypes.Task = 
+    let private toTask (getAvaliableStatuses: GetAvaliableStatuses) (task: ElasticTask): Domain.TaskPublicTypes.Task = 
+        let status = 
+            match task.Status with
+            | "InProgress" -> TaskStatusExtended.StudentInProgress
+            | "ToDo" -> TaskStatusExtended.StudentToDo
+            | "Done" -> TaskStatusExtended.SupervisorToDo
         {
             Id = task.Id
             Type = task.Type
@@ -19,19 +25,17 @@ module Queries =
             Supervisor = task.Supervisor
             Group = task.Group
             Deadline = task.Deadline
-            Status = match task.Status with
-                | "InProgress" -> TaskStatus.InProgress
-                | "ToDo" -> TaskStatus.ToDo
-                | "Done" -> TaskStatus.Done
+            Status = status
             Description = task.Description
             Comments = task.Comments
+            AvaliableStatuses = getAvaliableStatuses task.Type status
         }
     
-    let getTaskById (elasticOptions: ElasticOptions) (id: string): Domain.TaskPublicTypes.Task option = 
+    let getTaskById (getAvaliableStatuses: GetAvaliableStatuses) (elasticOptions: ElasticOptions) (id: string): Domain.TaskPublicTypes.Task option = 
         elasticOptions
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             QueryContainer(IdsQuery(Values = [|Id id|])))
         |> FsNest.hits<ElasticTask>
         |> Seq.tryHead
-        |> Option.map (setElasticTaskId >> toTask)
+        |> Option.map (setElasticTaskId >> toTask getAvaliableStatuses)

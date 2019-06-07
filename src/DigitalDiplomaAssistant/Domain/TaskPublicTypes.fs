@@ -3,6 +3,17 @@
 module TaskPublicTypes = 
     open System
 
+    type TaskStatusExtended = 
+    | StudentToDo
+    | StudentInProgress
+    | SupervisorToDo
+    | SupervisorInProgress
+    | NormControllerToDo
+    | NormControllerInProgress
+    | UnicheckvalidatorToDo
+    | UnicheckValidatorInProgress
+    | ReadyForMetodist
+
     type Task = {
         Id: string
         Type: string
@@ -10,8 +21,9 @@ module TaskPublicTypes =
         Assignee: Assignee
         Supervisor: Supervisor
         Group: string
-        Status: TaskStatus
+        Status: TaskStatusExtended
         Deadline: DateTime
         Description: Description
         Comments: Comment list
+        AvaliableStatuses: TaskStatusExtended list
     }
