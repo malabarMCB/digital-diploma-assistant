@@ -12,11 +12,7 @@ module Queries =
         {hit.Source with Id = hit.Id}
 
     let private toTask (getAvaliableStatuses: GetAvaliableStatuses) (task: ElasticTask): Domain.TaskPublicTypes.Task = 
-        let status = 
-            match task.Status with
-            | "InProgress" -> TaskStatusExtended.StudentInProgress
-            | "ToDo" -> TaskStatusExtended.StudentToDo
-            | "Done" -> TaskStatusExtended.SupervisorToDo
+        let status = TaskStatusExtended.fromString task.Status
         {
             Id = task.Id
             Type = task.Type

@@ -24,7 +24,7 @@ module Task =
             | TaskStatusExtended.SupervisorToDo -> [TaskStatusExtended.SupervisorInProgress]
             | TaskStatusExtended.SupervisorInProgress -> [TaskStatusExtended.StudentToDo; TaskStatusExtended.NormControllerToDo]
             | TaskStatusExtended.NormControllerToDo -> [TaskStatusExtended.NormControllerInProgress]
-            | TaskStatusExtended.NormControllerInProgress -> [TaskStatusExtended.UnicheckvalidatorToDo]
-            | TaskStatusExtended.UnicheckvalidatorToDo -> [TaskStatusExtended.ReadyForMetodist]
+            | TaskStatusExtended.NormControllerInProgress -> [TaskStatusExtended.UnicheckValidatorToDo]
+            | TaskStatusExtended.UnicheckValidatorToDo -> [TaskStatusExtended.ReadyForMetodist]
             | TaskStatusExtended.ReadyForMetodist-> []
 

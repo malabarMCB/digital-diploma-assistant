@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Authentication\Authentication.fsproj" />
+    <ProjectReference Include="..\Commands\Commands.fsproj" />
     <ProjectReference Include="..\Common\Common.fsproj" />
     <ProjectReference Include="..\Domain\Domain.fsproj" />
     <ProjectReference Include="..\Queries\Queries.fsproj" />

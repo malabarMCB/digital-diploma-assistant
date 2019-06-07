@@ -10,9 +10,22 @@ module TaskPublicTypes =
     | SupervisorInProgress = 4
     | NormControllerToDo = 5
     | NormControllerInProgress = 6
-    | UnicheckvalidatorToDo = 7
+    | UnicheckValidatorToDo = 7
     | UnicheckValidatorInProgress = 8
     | ReadyForMetodist = 9
+
+    module TaskStatusExtended = 
+        let fromString (status: string) = 
+            match status with 
+            | "StudentToDo" -> TaskStatusExtended.StudentToDo
+            | "StudentInProgress" -> TaskStatusExtended.StudentInProgress
+            | "SupervisorToDo" -> TaskStatusExtended.SupervisorToDo
+            | "SupervisorInProgress" -> TaskStatusExtended.SupervisorInProgress
+            | "NormControllerToDo" -> TaskStatusExtended.NormControllerToDo
+            | "NormControllerInProgress" -> TaskStatusExtended.NormControllerInProgress
+            | "UnicheckValidatorToDo" -> TaskStatusExtended.UnicheckValidatorToDo
+            | "UnicheckValidatorInProgress" -> TaskStatusExtended.UnicheckValidatorInProgress
+            | "ReadyForMetodist" -> TaskStatusExtended.ReadyForMetodist
 
     type Task = {
         Id: string

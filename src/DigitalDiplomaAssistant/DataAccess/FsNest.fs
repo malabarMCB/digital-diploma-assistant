@@ -36,5 +36,6 @@ module FsNest =
     let update indexName id (script: Script<'T>) (elasticClient: ElasticClient)= 
         let update = {Script = script}
         let postData = Elasticsearch.Net.PostData.Serializable update
-        elasticClient.LowLevel.Update<Elasticsearch.Net.DynamicResponse>(indexName, "_doc", id, postData)
-
+        let response = elasticClient.LowLevel.Update<Elasticsearch.Net.DynamicResponse>(indexName, "_doc", id, postData)
+        elasticClient.Refresh (Indices.Parse indexName) |> ignore
+        response

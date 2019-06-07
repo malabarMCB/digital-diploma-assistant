@@ -18,5 +18,7 @@ type TaskController() =
 
     [<HttpPost("{id}/status")>]
     member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatusExtended ) = 
-        this.RedirectToAction("Index")
+        changeTaskStatus id status
+        let task = id |> getTaskById |> Option.get
+        this.View("Index", task)
         
