@@ -12,7 +12,7 @@ type TaskController() =
 
     [<HttpGet>]
     member this.Index() = 
-        let task = "GJZPLGsB2N0LygMFURhw" |> getTaskById |> Option.get
+        let task = "Zf24MWsB23tLy1EGf-Z0" |> getTaskById |> Option.get
         this.View(task)
         
 
