@@ -2,6 +2,8 @@
 
 module Task = 
     open Domain.TaskPublicTypes
+    open System.IO
+    open System
 
     type GetAvaliableStatuses = string -> TaskStatusExtended -> TaskStatusExtended list
 
@@ -27,4 +29,26 @@ module Task =
             | TaskStatusExtended.NormControllerInProgress -> [TaskStatusExtended.UnicheckValidatorToDo]
             | TaskStatusExtended.UnicheckValidatorToDo -> [TaskStatusExtended.ReadyForMetodist]
             | TaskStatusExtended.ReadyForMetodist-> []
+
+    let saveCommentFile (folderPath: string) (taskId: string) (fileName: string) (file: Stream) = 
+        let directory = folderPath + @"\" + taskId
+        if  Directory.Exists directory = false then
+            Directory.CreateDirectory directory |> ignore
+        let createdFile = File.Create (directory + @"\" + Guid.NewGuid().ToString() + Path.GetExtension fileName)
+        file.CopyTo createdFile
+        Path.GetFileName createdFile.Name
+
+    let createComment (author: Person) (text: string) (fileName: string) (filePath: string): Comment =
+        {
+            Author = author
+            Text = text
+            PostDate = DateTime.UtcNow
+            Attachments = [
+                {
+                    Name = fileName
+                    FilePath = filePath
+                    UploadDate = DateTime.UtcNow
+                }
+            ]
+        }
 

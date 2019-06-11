@@ -107,8 +107,8 @@
                                     @comment.Text
                                     @foreach (var attachment in @comment.Attachments)
                                     {
-                                    <br>
-                                    <a href="#">@attachment.Name</a>
+                                        <br>
+                                        <a href="/task/@Model.Id/file/@attachment.FilePath">@attachment.Name</a>
                                     }
                                 </li>
                             </ul>
@@ -116,15 +116,13 @@
                         }
                     }
                     <hr>
-                    <div class="form-group">
+                    <form action="/task/@Model.Id/comments" method="post" class="form-group" enctype="multipart/form-data">
                         <label for="exampleFormControlTextarea1"> <h4> Додати комментар:</h4></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
                         <h4><label for="exampleFormControlFile1">Завантажити новий файл:</label></h4>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <button type="button" class="btn btn-light">Надiслати</button>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+                        <button type="submit" class="btn btn-light">Надiслати</button>
+                    </form>
                     <hr>
                     <br>
                     <br>
