@@ -25,8 +25,10 @@ type TaskController(httpContextAccessor: IHttpContextAccessor) =
         this.View(task)
 
     [<HttpPost("{id}/status")>]
-    member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatusExtended ) = 
-        changeTaskStatus id status
+    member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatusExtended ) =     
+        let task = id |> getTaskById |> Option.get
+        let task = changeTaskAssigneeToStatus task status
+        changeTaskStatus id status task.Assignee
         let task = id |> getTaskById |> Option.get
         this.View("Index", task)
 

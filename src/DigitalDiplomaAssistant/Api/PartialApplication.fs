@@ -19,7 +19,10 @@ module PartialApplication =
     let getDashboardTasks () = options |> Dashboard.Queries.getTasks
     let authenticate = options |> Authentication.Queries.getUser |> Authentication.Authentication.authenticate
     let getTaskById (id: string)= Task.Queries.getTaskById Task.getAvaliableStatuses options id
-    let changeTaskStatus = options |> TaskCommands.updateTaskStatus
+
+    let getPersonByRole = Task.Queries.getPersonByRole options
+    let changeTaskStatus = TaskCommands.updateTaskStatus options
+    let changeTaskAssigneeToStatus = Task.updateTaskStatus getPersonByRole
 
     let saveCommentFile taskId fileName (file: System.IO.Stream): string = Task.saveCommentFile fileStoragePath taskId fileName file
     let createComment = Task.createComment

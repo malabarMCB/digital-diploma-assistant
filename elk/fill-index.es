@@ -217,3 +217,9 @@ PUT dda-user/_doc/_mapping
 POST _bulk
 {"index": {"_index":"dda-user", "_type":"_doc","_id": "1"}}
 {"login":"login", "password": "123", "firstName": "Антон", "lastName":"Солярик", "role":"student"}
+{"index": {"_index":"dda-user", "_type":"_doc","_id": "2"}}
+{"login":"login1", "password": "123", "firstName": "НормконтроллерfirstName", "lastName":"НормконтролерlastName", "role":"normController"}
+{"index": {"_index":"dda-user", "_type":"_doc","_id": "3"}}
+{"login":"login2", "password": "123", "firstName": "ПлагиатfirstName", "lastName":"ПлагиатlastName", "role":"unicheckValidator"}
+{"index": {"_index":"dda-user", "_type":"_doc","_id": "4"}}
+{"login":"login3", "password": "123", "firstName": "МетодистfirstName", "lastName":"МетодистlastName", "role":"metodist"}

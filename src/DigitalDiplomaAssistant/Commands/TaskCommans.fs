@@ -8,14 +8,16 @@ module TaskCommands =
 
     type  StatusParams = {
         Status: string
+        Assignee: Person
     }
-    let updateTaskStatus (elasticOptions: ElasticOptions) (id: string) (status: TaskStatusExtended) = 
+    let updateTaskStatus (elasticOptions: ElasticOptions) (id: string) (status: TaskStatusExtended) (assignee: Person) = 
         elasticOptions |> FsNest.createElasticClient
         |> FsNest.update "dda-task" id {
             Lang = "painless"
-            Inline = "ctx._source.status = params.status"
+            Inline = "ctx._source.status = params.status; ctx._source.assignee = params.assignee"
             Params = {
                 Status = status.ToString()
+                Assignee = assignee
             }
          } |> ignore
         

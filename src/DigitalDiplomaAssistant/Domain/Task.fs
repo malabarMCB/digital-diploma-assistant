@@ -52,3 +52,11 @@ module Task =
             ]
         }
 
+    let updateTaskStatus (getPersonByRole: string -> Person) (task: Task) (status: TaskStatusExtended) = 
+        match status with 
+        | TaskStatusExtended.StudentToDo | TaskStatusExtended.StudentInProgress -> {task with Status = status; Assignee = task.Student}
+        | TaskStatusExtended.SupervisorToDo | TaskStatusExtended.SupervisorInProgress -> {task with Status = status; Assignee = task.Supervisor}
+        | TaskStatusExtended.NormControllerToDo | TaskStatusExtended.NormControllerInProgress -> {task with Status = status; Assignee = getPersonByRole "normController"}
+        | TaskStatusExtended.UnicheckValidatorToDo | TaskStatusExtended.UnicheckValidatorInProgress -> {task with Status = status; Assignee = getPersonByRole "unicheckValidator"}
+        | TaskStatusExtended.ReadyForMetodist -> {task with Status = status; Assignee = getPersonByRole "metodist"}
+
