@@ -11,6 +11,8 @@
     <Compile Include="Task\TaskQueries.fs" />
     <Compile Include="Authentication\AuthenticationPublicTypes.fs" />
     <Compile Include="Authentication\AuthenticationQueries.fs" />
+    <Compile Include="Metodist\MetodistPublicTypes.fs" />
+    <Compile Include="Metodist\MetodistQueries.fs" />
   </ItemGroup>
 
   <ItemGroup>

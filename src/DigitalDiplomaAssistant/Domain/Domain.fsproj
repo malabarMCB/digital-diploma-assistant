@@ -9,6 +9,7 @@
       <Compile Include="TaskPublicTypes.fs" />
       <Compile Include="DashboardPublicTypes.fs" />
       <Compile Include="Task.fs" />
+      <Compile Include="Metodist.fs" />
     </ItemGroup>
 
 </Project>

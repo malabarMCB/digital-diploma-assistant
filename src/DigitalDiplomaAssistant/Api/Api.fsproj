@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Models.fs" />
     <Compile Include="PartialApplication.fs" />
+    <Compile Include="Controllers\MetodistController.fs" />
     <Compile Include="Controllers\TaskController.fs" />
     <Compile Include="Controllers\LoginController.fs" />
     <Compile Include="Controllers\DashboardController.fs" />
