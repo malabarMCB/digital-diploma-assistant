@@ -21,9 +21,9 @@ module Queries =
             Group = task.Group
             Deadline = task.Deadline
             Status = match task.Status with
-                | "InProgress" -> TaskStatus.InProgress
-                | "ToDo" -> TaskStatus.ToDo
-                | "Done" -> TaskStatus.Done
+                | "StudentInProgress" | "SupervisorInProgress" | "NormControllerInProgress" | "UnicheckValidatorInProgress" -> TaskStatus.InProgress
+                | "StudentToDo"| "SupervisorToDo" | "NormControllerToDo" | "UnicheckValidatorToDo" -> TaskStatus.ToDo
+                | "ReadyForMetodist" -> TaskStatus.Done
         } 
 
     let getTasks (elasticOptions: ElasticOptions): DashboardPublicTypes.Task seq =

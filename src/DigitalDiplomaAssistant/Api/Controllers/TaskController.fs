@@ -19,9 +19,9 @@ type TaskController(httpContextAccessor: IHttpContextAccessor) =
     let getClaimValue claimType = 
          httpContextAccessor.HttpContext.User.Claims.Single(fun (claim: Claim) -> claim.Type = claimType).Value
 
-    [<HttpGet>]
-    member this.Index() = 
-        let task = "Zf24MWsB23tLy1EGf-Z0" |> getTaskById |> Option.get
+    [<HttpGet("{id}")>]
+    member this.Index(id: string) = 
+        let task = id |> getTaskById |> Option.get
         this.View(task)
 
     [<HttpPost("{id}/status")>]
