@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Commands\Commands.fsproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
+    <ProjectReference Include="..\Domain\Domain.fsproj" />
+    <ProjectReference Include="..\Queries\Queries.fsproj" />
+  </ItemGroup>
+
+</Project>

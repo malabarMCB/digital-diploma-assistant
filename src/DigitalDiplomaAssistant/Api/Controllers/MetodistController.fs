@@ -7,6 +7,7 @@ open Microsoft.AspNetCore.Authentication.Cookies;
 open Domain.Metodist
 open Domain.PublicTypes
 open System
+open Microsoft.AspNetCore.Http
 
 [<Route("[controller]")>]
 [<Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)>]
@@ -29,3 +30,7 @@ type MetodistController () =
         let description = getMetodistTaskDescription TaskType.PracticeDairy
         this.View("Index", description)
 
+    [<HttpPost>]
+    member this.update([<FromForm>] text: string, [<FromForm>]file: IFormFile) = 
+        let description = getMetodistTaskDescription TaskType.PracticeDairy
+        this.View("Index", description)
