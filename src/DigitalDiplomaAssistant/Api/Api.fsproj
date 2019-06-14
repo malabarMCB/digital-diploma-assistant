@@ -28,4 +28,10 @@
     <ProjectReference Include="..\Queries\Queries.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Metodist\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

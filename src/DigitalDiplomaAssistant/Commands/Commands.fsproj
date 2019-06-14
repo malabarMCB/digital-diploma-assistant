@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Include="TaskCommans.fs" />
+    <Compile Include="MetodistCommands.fs" />
   </ItemGroup>
 
   <ItemGroup>

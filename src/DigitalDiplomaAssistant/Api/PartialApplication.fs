@@ -27,4 +27,7 @@ module PartialApplication =
     let saveCommentFile taskId fileName (file: System.IO.Stream): string = Task.saveCommentFile fileStoragePath taskId fileName file
     let createComment = Task.createComment
     let addComment = options |> TaskCommands.addComment
+
+    let getMetodistTaskDescription = Metodist.Queries.getTaskDescription options
+    let deleteDesctiptionAttachments = MetodistCommands.deleteAttachmentDescription options
     

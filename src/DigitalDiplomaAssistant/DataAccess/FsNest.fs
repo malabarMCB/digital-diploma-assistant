@@ -33,9 +33,28 @@ module FsNest =
         Script: Script<'T>
     }
 
+    type Query<'T> = {
+        Query: 'T
+    }
+
+    type UpdateByQuery<'T, 'U> = {
+        Query: 'T
+        Script: Script<'U>
+    }
+
     let update indexName id (script: Script<'T>) (elasticClient: ElasticClient)= 
         let update = {Script = script}
         let postData = Elasticsearch.Net.PostData.Serializable update
         let response = elasticClient.LowLevel.Update<Elasticsearch.Net.DynamicResponse>(indexName, "_doc", id, postData)
+        elasticClient.Refresh (Indices.Parse indexName) |> ignore
+        response
+
+    let updateByQuery (elasticClient: ElasticClient) indexName (query: Query<'T>) (script: Script<'U>) = 
+        let update = {
+            Query = query.Query
+            Script = script
+        }
+        let postData = Elasticsearch.Net.PostData.Serializable update
+        let response = elasticClient.LowLevel.UpdateByQuery<Elasticsearch.Net.DynamicResponse>(indexName, "_doc", postData)
         elasticClient.Refresh (Indices.Parse indexName) |> ignore
         response
