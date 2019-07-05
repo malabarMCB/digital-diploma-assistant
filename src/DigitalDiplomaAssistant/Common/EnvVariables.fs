@@ -13,3 +13,8 @@ module EnvVariables =
         match getEnvVariableOption name with
         | None -> name |> failwithf "There is no env variable with name: %s"
         | Some value -> value 
+
+    let getEnvVariableWithDefaultValue name defaultValue = 
+        match name |> getEnvVariableOption with
+        | Some value -> value
+        | None -> defaultValue

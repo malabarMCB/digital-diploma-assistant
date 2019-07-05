@@ -14,7 +14,7 @@ module PartialApplication =
         UserName = "Elastic:UserName" |> getEnvVariableOption
         Password = "Elastic:Password" |> getEnvVariableOption
     }
-    let fileStoragePath = @"D:\dda-file-storage"
+    let fileStoragePath = getEnvVariableWithDefaultValue "FileStoragePath" @"D:\dda-file-storage"
     
     let getDashboardTasks () = options |> Dashboard.Queries.getTasks
     let authenticate = options |> Authentication.Queries.getUser |> Authentication.Authentication.authenticate
