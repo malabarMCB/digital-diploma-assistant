@@ -4,7 +4,6 @@ open Microsoft.AspNetCore.Mvc
 open Api
 open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Authentication.Cookies;
-open Domain.Metodist
 open Domain.PublicTypes
 open System
 open Microsoft.AspNetCore.Http

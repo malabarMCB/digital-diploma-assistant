@@ -5,15 +5,12 @@ open Nest
 open DataAccess
 open Domain
 open Domain.Task
-open Domain.Metodist
-open Domain.TaskPublicTypes
-open Domain.DashboardPublicTypes
 
 module Queries = 
     let private setElasticTaskId (hit: IHit<ElasticTask>): ElasticTask = 
         {hit.Source with Id = hit.Id}
 
-    let getDashboardTask (elasticOptions: ElasticOptions): DashboardPublicTypes.Task seq =
+    let getDashboardTask (elasticOptions: ElasticOptions): DashboardTask seq =
         elasticOptions 
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd ->  QueryContainer(MatchAllQuery()))
@@ -27,14 +24,11 @@ module Queries =
                 Supervisor = task.Supervisor.FirstName + " " + task.Supervisor.LastName
                 Group = task.Group
                 Deadline = task.Deadline
-                Status = match task.Status with
-                    | "StudentInProgress" | "SupervisorInProgress" | "NormControllerInProgress" | "UnicheckValidatorInProgress" -> TaskStatus.InProgress
-                    | "StudentToDo"| "SupervisorToDo" | "NormControllerToDo" | "UnicheckValidatorToDo" -> TaskStatus.ToDo
-                    | "ReadyForMetodist" -> TaskStatus.Done
+                Status = DashboardTaskStatus.fromString task.Status
             }
         )
    
-    let getTaskById (getAvaliableStatuses: GetAvaliableStatuses) (elasticOptions: ElasticOptions) (id: string): Domain.TaskPublicTypes.Task option = 
+    let getTaskById (getAvaliableStatuses: GetAvaliableStatuses) (elasticOptions: ElasticOptions) (id: string): Task option = 
         elasticOptions
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
@@ -54,14 +48,14 @@ module Queries =
                 Status = status
                 Description = task.Description
                 Comments = task.Comments
-                AvaliableStatuses = getAvaliableStatuses task.Type status
+                AvaliableStatuses = getAvaliableStatuses (TaskType.fromString task.Type) status
             }  
         )
 
     let getTaskDescription (elasticOptions: ElasticOptions) (taskType: TaskType) = 
         let toMetodistTaskDescription (taskDescription: IHit<ElasticTask>): MetodistTaskDescription = 
             {
-                Type = taskDescription.Source.Type |> TaskType.create
+                Type = taskDescription.Source.Type |> TaskType.fromString
                 Description = taskDescription.Source.Description
             }
         elasticOptions |> FsNest.createElasticClient

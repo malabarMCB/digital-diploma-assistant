@@ -1,5 +1,6 @@
 ﻿namespace Api.Controllers
 
+open Authentication
 open Microsoft.AspNetCore.Mvc
 open Api
 open Microsoft.AspNetCore.Http
@@ -10,8 +11,8 @@ open Microsoft.AspNetCore.Authentication.Cookies;
 [<Route("[controller]")>]
 type LoginController (httpContextAccessor: IHttpContextAccessor) = 
     inherit Controller()
-        
-    let setAuthCookie (user: Authentication.User) = 
+       
+    let setAuthCookie (user: User) = 
         let claims: Claim list = [
             Claim(ClaimTypes.Sid, user.Id);
             Claim(ClaimTypes.Name, user.FirstName)

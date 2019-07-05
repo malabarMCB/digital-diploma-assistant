@@ -1,34 +1,33 @@
 ﻿namespace Domain
 
 module Task = 
-    open Domain.TaskPublicTypes
     open System.IO
     open System
 
-    type GetAvaliableStatuses = string -> TaskStatusExtended -> TaskStatusExtended list
+    type GetAvaliableStatuses = TaskType -> TaskStatus -> TaskStatus list
 
-    let getAvaliableStatuses taskType taskStatus: TaskStatusExtended list = 
+    let getAvaliableStatuses taskType taskStatus: TaskStatus list = 
         match taskType with
-        | "Презентація захисту практики" | "Щоденник практики" | "Звіт з практики" 
-        | "Бланк заяви про обрання теми" | "Відгук з практики" | "Презентація предзахисту"
-        | "Презентація до захисту" | "Відгук наукового керівника" | "Акти впровадженя"
-        | "Гарантійний лист" -> 
+        | TaskType.PracticePresentation | TaskType.PracticeDairy | TaskType.PracticeReport
+        | TaskType.TopicAcceptanceDocument | TaskType.PracticeReview | TaskType.PreDefencePresentation
+        | TaskType.DefencePresentation | TaskType.SupervisorReview | TaskType.InjectionAct
+        | TaskType.GuaranteeMail -> 
             match taskStatus with
-            | TaskStatusExtended.StudentToDo -> [TaskStatusExtended.StudentInProgress]
-            | TaskStatusExtended.StudentInProgress -> [TaskStatusExtended.StudentToDo; TaskStatusExtended.SupervisorToDo]
-            | TaskStatusExtended.SupervisorToDo -> [TaskStatusExtended.SupervisorInProgress]
-            | TaskStatusExtended.SupervisorInProgress -> [TaskStatusExtended.StudentToDo; TaskStatusExtended.ReadyForMetodist]
-            | TaskStatusExtended.ReadyForMetodist -> []
-        | "Дипломна робота" -> 
+            | TaskStatus.StudentToDo -> [TaskStatus.StudentInProgress]
+            | TaskStatus.StudentInProgress -> [TaskStatus.StudentToDo; TaskStatus.SupervisorToDo]
+            | TaskStatus.SupervisorToDo -> [TaskStatus.SupervisorInProgress]
+            | TaskStatus.SupervisorInProgress -> [TaskStatus.StudentToDo; TaskStatus.ReadyForMetodist]
+            | TaskStatus.ReadyForMetodist -> []
+        | TaskType.Diploma -> 
             match taskStatus with
-            | TaskStatusExtended.StudentToDo -> [TaskStatusExtended.StudentInProgress]
-            | TaskStatusExtended.StudentInProgress -> [TaskStatusExtended.StudentToDo; TaskStatusExtended.SupervisorToDo]
-            | TaskStatusExtended.SupervisorToDo -> [TaskStatusExtended.SupervisorInProgress]
-            | TaskStatusExtended.SupervisorInProgress -> [TaskStatusExtended.StudentToDo; TaskStatusExtended.NormControllerToDo]
-            | TaskStatusExtended.NormControllerToDo -> [TaskStatusExtended.NormControllerInProgress]
-            | TaskStatusExtended.NormControllerInProgress -> [TaskStatusExtended.UnicheckValidatorToDo]
-            | TaskStatusExtended.UnicheckValidatorToDo -> [TaskStatusExtended.ReadyForMetodist]
-            | TaskStatusExtended.ReadyForMetodist-> []
+            | TaskStatus.StudentToDo -> [TaskStatus.StudentInProgress]
+            | TaskStatus.StudentInProgress -> [TaskStatus.StudentToDo; TaskStatus.SupervisorToDo]
+            | TaskStatus.SupervisorToDo -> [TaskStatus.SupervisorInProgress]
+            | TaskStatus.SupervisorInProgress -> [TaskStatus.StudentToDo; TaskStatus.NormControllerToDo]
+            | TaskStatus.NormControllerToDo -> [TaskStatus.NormControllerInProgress]
+            | TaskStatus.NormControllerInProgress -> [TaskStatus.UnicheckValidatorToDo]
+            | TaskStatus.UnicheckValidatorToDo -> [TaskStatus.ReadyForMetodist]
+            | TaskStatus.ReadyForMetodist-> []
 
     let saveCommentFile (folderPath: string) (taskId: string) (fileName: string) (file: Stream) = 
         let directory = folderPath + @"\" + taskId
@@ -52,11 +51,11 @@ module Task =
             ]
         }
 
-    let updateTaskStatus (getPersonByRole: string -> Person) (task: Task) (status: TaskStatusExtended) = 
+    let updateTaskStatus (getPersonByRole: string -> Person) (task: Task) (status: TaskStatus) = 
         match status with 
-        | TaskStatusExtended.StudentToDo | TaskStatusExtended.StudentInProgress -> {task with Status = status; Assignee = task.Student}
-        | TaskStatusExtended.SupervisorToDo | TaskStatusExtended.SupervisorInProgress -> {task with Status = status; Assignee = task.Supervisor}
-        | TaskStatusExtended.NormControllerToDo | TaskStatusExtended.NormControllerInProgress -> {task with Status = status; Assignee = getPersonByRole "normController"}
-        | TaskStatusExtended.UnicheckValidatorToDo | TaskStatusExtended.UnicheckValidatorInProgress -> {task with Status = status; Assignee = getPersonByRole "unicheckValidator"}
-        | TaskStatusExtended.ReadyForMetodist -> {task with Status = status; Assignee = getPersonByRole "metodist"}
+        | TaskStatus.StudentToDo | TaskStatus.StudentInProgress -> {task with Status = status; Assignee = task.Student}
+        | TaskStatus.SupervisorToDo | TaskStatus.SupervisorInProgress -> {task with Status = status; Assignee = task.Supervisor}
+        | TaskStatus.NormControllerToDo | TaskStatus.NormControllerInProgress -> {task with Status = status; Assignee = getPersonByRole "normController"}
+        | TaskStatus.UnicheckValidatorToDo | TaskStatus.UnicheckValidatorInProgress -> {task with Status = status; Assignee = getPersonByRole "unicheckValidator"}
+        | TaskStatus.ReadyForMetodist -> {task with Status = status; Assignee = getPersonByRole "metodist"}
 

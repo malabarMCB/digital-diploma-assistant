@@ -5,6 +5,7 @@ module PartialApplication =
     open DataAccess
     open Common
     open Domain
+    open Authentication
 
     let private options = {
         Uri = "Elastic:Uri" |> getEnvVariable
@@ -13,8 +14,10 @@ module PartialApplication =
     }
     let fileStoragePath = getEnvVariableWithDefaultValue "FileStoragePath" @"D:\dda-file-storage"
     
+    let authenticate = options |> User.Queries.getUser |> Authentication.authenticate
+
     let getDashboardTasks () = options |> Task.Queries.getDashboardTask
-    let authenticate = options |> User.Queries.getUser |> Authentication.Authentication.authenticate
+    
     let getTaskById (id: string)= Task.Queries.getTaskById Task.getAvaliableStatuses options id
 
     let getPersonByRole = User.Queries.getPersonByRole options

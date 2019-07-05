@@ -2,8 +2,6 @@
 
 open DataAccess
 open Domain
-open Domain.TaskPublicTypes
-open Domain.Metodist
 open FsNest
 
 module Commands = 
@@ -11,7 +9,7 @@ module Commands =
         Status: string
         Assignee: Person
     }
-    let updateTaskStatus (elasticOptions: ElasticOptions) (id: string) (status: TaskStatusExtended) (assignee: Person) = 
+    let updateTaskStatus (elasticOptions: ElasticOptions) (id: string) (status: TaskStatus) (assignee: Person) = 
         elasticOptions |> FsNest.createElasticClient
         |> FsNest.update "dda-task" id {
             Lang = "painless"

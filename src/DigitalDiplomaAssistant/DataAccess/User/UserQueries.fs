@@ -3,7 +3,7 @@
 open System
 open Nest
 open DataAccess
-open Domain.PublicTypes
+open Domain
 open Authentication
 
 module Queries = 
@@ -11,12 +11,12 @@ module Queries =
     let getUser (elasticOptions: ElasticOptions) login password: Authentication.User option = 
         elasticOptions
         |> FsNest.createElasticClient
-        |> FsNest.query<User.User> "dda-user" (fun sd -> 
+        |> FsNest.query<ElasticUser> "dda-user" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
             QueryContainer(BoolQuery(Must = [
                 QueryContainer(TermQuery(Field = Field("login"), Value = login));
                 QueryContainer(TermQuery(Field = Field("password"), Value = password))])))
-        |> FsNest.hits<User.User> 
+        |> FsNest.hits<ElasticUser> 
         |> Seq.tryHead
         |> Option.map (fun hit -> 
             {

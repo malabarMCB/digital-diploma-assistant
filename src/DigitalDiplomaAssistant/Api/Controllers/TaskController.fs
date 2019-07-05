@@ -4,7 +4,6 @@ open Microsoft.AspNetCore.Mvc
 open Api
 open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Authentication.Cookies;
-open Domain.TaskPublicTypes
 open Microsoft.AspNetCore.Http
 open System.Linq
 open System.Security.Claims
@@ -25,7 +24,7 @@ type TaskController(httpContextAccessor: IHttpContextAccessor) =
         this.View(task)
 
     [<HttpPost("{id}/status")>]
-    member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatusExtended ) =     
+    member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatus ) =     
         let task = id |> getTaskById |> Option.get
         let task = changeTaskAssigneeToStatus task status
         changeTaskStatus id status task.Assignee
