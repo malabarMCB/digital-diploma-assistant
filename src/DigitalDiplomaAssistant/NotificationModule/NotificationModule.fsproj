@@ -10,10 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Commands\Commands.fsproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
-    <ProjectReference Include="..\Domain\Domain.fsproj" />
-    <ProjectReference Include="..\Queries\Queries.fsproj" />
   </ItemGroup>
 
 </Project>

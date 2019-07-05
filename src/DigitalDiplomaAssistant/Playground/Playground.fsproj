@@ -20,7 +20,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.fsproj" />
       <ProjectReference Include="..\DataAccess\DataAccess.fsproj" />
-      <ProjectReference Include="..\Queries\Queries.fsproj" />
     </ItemGroup>
 
 </Project>
