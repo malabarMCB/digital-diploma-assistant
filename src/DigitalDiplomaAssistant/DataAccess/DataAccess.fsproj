@@ -7,10 +7,19 @@
     <ItemGroup>
       <Compile Include="ElasticConfig.fs" />
       <Compile Include="FsNest.fs" />
+      <Compile Include="User\UserPublicTypes.fs" />
+      <Compile Include="User\UserQueries.fs" />
+      <Compile Include="Task\TaskPublicTypes.fs" />
+      <Compile Include="Task\TaskCommands.fs" />
+      <Compile Include="Task\TaskQueries.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="NEST" Version="6.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.fsproj" />
     </ItemGroup>
 
 </Project>
