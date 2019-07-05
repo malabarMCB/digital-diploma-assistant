@@ -2,27 +2,12 @@ namespace Authentication
 
 [<AutoOpen>]
 module Authentication =
-    type GetUser = string -> string -> Queries.Authentication.PublicTypes.User option
+    type GetUser = string -> string -> User option
 
     type AuthenticationResult = Result<User, string>
 
-    let private toUser (dbUser: Queries.Authentication.PublicTypes.User): User = 
-        {
-                Id = dbUser.Id
-                Login = dbUser.Login
-                FirstName = dbUser.FirstName
-                LastName = dbUser.LastName
-                Role = match dbUser.Role with
-                    | "student" -> UserRole.Student
-                    | "supervisor" -> UserRole.Supervisor
-                    | "metodist" -> UserRole.Metodist
-                    | "normController" -> UserRole.NormController
-                    | "unicheckValidator" -> UserRole.UnickeckValidator
-            }
-
     let authenticate (getUser: GetUser) (login, password): AuthenticationResult = 
         password |> getUser login 
-        |> Option.map toUser
         |> (fun userOption -> 
             match userOption with 
             | Some user -> Ok user

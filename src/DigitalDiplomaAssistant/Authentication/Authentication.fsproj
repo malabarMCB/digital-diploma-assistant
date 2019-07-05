@@ -9,8 +9,4 @@
     <Compile Include="Authentication.fs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Queries\Queries.fsproj" />
-  </ItemGroup>
-
 </Project>

@@ -7,6 +7,15 @@ type UserRole =
     | NormController = 4
     | UnickeckValidator = 5
 
+module UserRole = 
+    let fromString role = 
+        match role with 
+        | "student" -> UserRole.Student
+        | "supervisor" -> UserRole.Supervisor
+        | "metodist" -> UserRole.Metodist
+        | "normController" -> UserRole.NormController
+        | "unicheckValidator" -> UserRole.UnickeckValidator
+
 type User = {
     Id: string
     Login: string

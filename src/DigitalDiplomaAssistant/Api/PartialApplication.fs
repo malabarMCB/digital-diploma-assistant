@@ -4,9 +4,7 @@
 module PartialApplication = 
     open DataAccess
     open Common
-    open Queries
     open Domain
-    open Commands
 
     let private options = {
         Uri = "Elastic:Uri" |> getEnvVariable
@@ -15,18 +13,18 @@ module PartialApplication =
     }
     let fileStoragePath = getEnvVariableWithDefaultValue "FileStoragePath" @"D:\dda-file-storage"
     
-    //let getDashboardTasks () = options |> Dashboard.Queries.getTasks
-    let authenticate = options |> Authentication.Queries.getUser |> Authentication.Authentication.authenticate
+    let getDashboardTasks () = options |> Task.Queries.getDashboardTask
+    let authenticate = options |> User.Queries.getUser |> Authentication.Authentication.authenticate
     let getTaskById (id: string)= Task.Queries.getTaskById Task.getAvaliableStatuses options id
 
-    let getPersonByRole = Task.Queries.getPersonByRole options
-    let changeTaskStatus = TaskCommands.updateTaskStatus options
+    let getPersonByRole = User.Queries.getPersonByRole options
+    let changeTaskStatus = Task.Commands.updateTaskStatus options
     let changeTaskAssigneeToStatus = Task.updateTaskStatus getPersonByRole
 
     let saveCommentFile taskId fileName (file: System.IO.Stream): string = Task.saveCommentFile fileStoragePath taskId fileName file
     let createComment = Task.createComment
-    let addComment = options |> TaskCommands.addComment
+    let addComment = options |> Task.Commands.addComment
 
-    let getMetodistTaskDescription = Metodist.Queries.getTaskDescription options
-    let deleteDesctiptionAttachments = MetodistCommands.deleteAttachmentDescription options
+    let getMetodistTaskDescription = Task.Queries.getTaskDescription options
+    let deleteDesctiptionAttachments = Task.Commands.deleteAttachmentDescription options
     
