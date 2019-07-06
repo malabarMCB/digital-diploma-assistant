@@ -16,7 +16,7 @@ module Queries =
             QueryContainer(BoolQuery(Must = [
                 QueryContainer(TermQuery(Field = Field("login"), Value = login));
                 QueryContainer(TermQuery(Field = Field("password"), Value = password))])))
-        |> FsNest.hits<ElasticUser> 
+        |> FsNest.hits
         |> Seq.tryHead
         |> Option.map (fun hit -> 
             {
@@ -33,7 +33,7 @@ module Queries =
         |> FsNest.query<Person> "dda-user" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
             QueryContainer(TermQuery(Field = Field("role"), Value = role)))
-        |> FsNest.hits<Person>
+        |> FsNest.hits
         |> Seq.head
         |> fun hit -> {hit.Source with Id = hit.Id}
 

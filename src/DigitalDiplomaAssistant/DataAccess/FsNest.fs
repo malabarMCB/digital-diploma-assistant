@@ -11,7 +11,7 @@ module FsNest =
             settings.BasicAuthentication(options.UserName.Value,options.Password.Value) |> ignore
         ElasticClient(settings);
 
-    let hits<'T when 'T: not struct> (query: ISearchResponse<'T>) = 
+    let hits (query: ISearchResponse<'T>) = 
         query.Hits |> Seq.cast<IHit<'T>>
 
     let query<'T when 'T: not struct>  indexName (f:(SearchDescriptor<'T> -> QueryContainer)) (elasticClient: ElasticClient) : ISearchResponse<'T> = 

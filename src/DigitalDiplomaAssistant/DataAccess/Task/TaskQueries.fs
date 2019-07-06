@@ -14,7 +14,7 @@ module Queries =
         elasticOptions 
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd ->  QueryContainer(MatchAllQuery()))
-        |> FsNest.hits<ElasticTask>
+        |> FsNest.hits
         |> Seq.map (setElasticTaskId >> fun task -> 
             {
                 Id = task.Id
@@ -33,7 +33,7 @@ module Queries =
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             QueryContainer(IdsQuery(Values = [|Id id|])))
-        |> FsNest.hits<ElasticTask>
+        |> FsNest.hits
         |> Seq.tryHead
         |> Option.map (setElasticTaskId >> fun task ->
             let status = TaskStatusExtended.fromString task.Status
@@ -62,6 +62,6 @@ module Queries =
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
             QueryContainer(TermQuery(Field = Field("type"), Value = TaskType.toString taskType)))
-        |> FsNest.hits<ElasticTask>
+        |> FsNest.hits
         |> Seq.head
         |> toMetodistTaskDescription
