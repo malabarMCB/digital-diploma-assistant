@@ -3,6 +3,7 @@
 module Task = 
     open System.IO
     open System
+    open Authentication 
 
     type GetAvaliableStatuses = TaskType -> TaskStatus -> TaskStatus list
 
@@ -51,11 +52,11 @@ module Task =
             ]
         }
 
-    let updateTaskStatus (getPersonByRole: string -> Person) (task: Task) (status: TaskStatus) = 
+    let updateTaskStatus (getPersonByRole: UserRole -> Person) (task: Task) (status: TaskStatus) = 
         match status with 
         | TaskStatus.StudentToDo | TaskStatus.StudentInProgress -> {task with Status = status; Assignee = task.Student}
         | TaskStatus.SupervisorToDo | TaskStatus.SupervisorInProgress -> {task with Status = status; Assignee = task.Supervisor}
-        | TaskStatus.NormControllerToDo | TaskStatus.NormControllerInProgress -> {task with Status = status; Assignee = getPersonByRole "normController"}
-        | TaskStatus.UnicheckValidatorToDo | TaskStatus.UnicheckValidatorInProgress -> {task with Status = status; Assignee = getPersonByRole "unicheckValidator"}
-        | TaskStatus.ReadyForMetodist -> {task with Status = status; Assignee = getPersonByRole "metodist"}
+        | TaskStatus.NormControllerToDo | TaskStatus.NormControllerInProgress -> {task with Status = status; Assignee = getPersonByRole UserRole.NormController}
+        | TaskStatus.UnicheckValidatorToDo | TaskStatus.UnicheckValidatorInProgress -> {task with Status = status; Assignee = getPersonByRole UserRole.UnickeckValidator}
+        | TaskStatus.ReadyForMetodist -> {task with Status = status; Assignee = getPersonByRole UserRole.Metodist}
 

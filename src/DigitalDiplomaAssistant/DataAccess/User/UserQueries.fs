@@ -28,11 +28,11 @@ module Queries =
             }          
         )
 
-    let getPersonByRole (elasticOptions: ElasticOptions) (role: string): Person = 
+    let getPersonByRole (elasticOptions: ElasticOptions) (role: UserRole): Person = 
         elasticOptions |> FsNest.createElasticClient 
         |> FsNest.query<Person> "dda-user" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
-            QueryContainer(TermQuery(Field = Field("role"), Value = role)))
+            QueryContainer(TermQuery(Field = Field("role"), Value = UserRole.toString role)))
         |> FsNest.hits
         |> Seq.head
         |> fun hit -> {hit.Source with Id = hit.Id}

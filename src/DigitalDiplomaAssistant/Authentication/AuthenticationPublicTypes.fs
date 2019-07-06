@@ -16,6 +16,14 @@ module UserRole =
         | "normController" -> UserRole.NormController
         | "unicheckValidator" -> UserRole.UnickeckValidator
 
+    let toString role = 
+        match role with 
+        | Student -> "student"
+        | Supervisor -> "supervisor"
+        | Metodist -> "metodist"
+        | NormController -> "normController"
+        | UnickeckValidator -> "unicheckValidator"
+
 type User = {
     Id: string
     Login: string

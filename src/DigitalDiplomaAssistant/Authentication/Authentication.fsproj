@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="PublicTypes.fs" />
+    <Compile Include="AuthenticationPublicTypes.fs" />
     <Compile Include="Authentication.fs" />
   </ItemGroup>
 

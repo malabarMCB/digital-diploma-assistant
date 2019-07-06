@@ -9,4 +9,8 @@
       <Compile Include="Task.fs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Authentication\Authentication.fsproj" />
+    </ItemGroup>
+
 </Project>
