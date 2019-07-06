@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Include="PublicTypes.fs" />
+      <Compile Include="DomainPublicTypes.fs" />
       <Compile Include="Task.fs" />
     </ItemGroup>
 
