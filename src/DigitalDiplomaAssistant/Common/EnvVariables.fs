@@ -1,6 +1,5 @@
 namespace Common
 
-[<AutoOpen>]
 module EnvVariables =
     open System
 

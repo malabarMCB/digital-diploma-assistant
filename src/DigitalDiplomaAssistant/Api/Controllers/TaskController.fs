@@ -5,48 +5,56 @@ open Api
 open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Authentication.Cookies;
 open Microsoft.AspNetCore.Http
-open System.Linq
-open System.Security.Claims
-open Domain.PublicTypes
-open System.IO
+open Domain
 
 [<Route("[controller]")>]
 [<Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)>]
 type TaskController(httpContextAccessor: IHttpContextAccessor) = 
     inherit Controller()
 
-    let getClaimValue claimType = 
-         httpContextAccessor.HttpContext.User.Claims.Single(fun (claim: Claim) -> claim.Type = claimType).Value
-
     [<HttpGet("{id}")>]
     member this.Index(id: string) = 
-        let task = id |> getTaskById |> Option.get
-        this.View(task)
+        match getTaskWithAvaliableStatusesWorkflow id with
+        | Ok ok -> 
+            match ok with
+            | Some task -> this.View(task) :> IActionResult
+            | None -> this.NotFound() :> IActionResult
+        | Error _ -> this.UnprocessableEntity() :> IActionResult
+
 
     [<HttpPost("{id}/status")>]
     member this.ChangeTaskStatus(id: string, [<FromForm>]status: TaskStatus ) =     
-        let task = id |> getTaskById |> Option.get
-        let task = changeTaskAssigneeToStatus task status
-        changeTaskStatus id status task.Assignee
-        let task = id |> getTaskById |> Option.get
-        this.View("Index", task)
+        let command = {
+            TaskId = id
+            TaskStatus = status
+        }
+        match changeStatusWorkflow command with
+        | Ok ok -> this.View(ok) :> IActionResult
+        | Error _ -> this.UnprocessableEntity() :> IActionResult
+
 
     [<HttpPost("{id}/comments")>]
     member this.AddComment(id: string, [<FromForm>]text: string, [<FromForm>]file: IFormFile) = 
-        let stream = file.OpenReadStream()
-        let filePath = saveCommentFile id file.FileName stream
-        let author: Person =  {
-            Id = getClaimValue ClaimTypes.Sid
-            FirstName = getClaimValue ClaimTypes.Name
-            LastName = getClaimValue ClaimTypes.Surname
+        let command = {
+            TaskId = id
+            CommentText = text
+            AttachmentName = file.FileName
+            AttachmentStream = file.OpenReadStream()
+            CommentAuthor = {
+                Id = httpContextAccessor |> FsHttpContextAccessor.getUserId |> Option.get
+                FirstName = httpContextAccessor |> FsHttpContextAccessor.getUserFirstName |> Option.get
+                LastName = httpContextAccessor |> FsHttpContextAccessor.getUserLastName |> Option.get
+            }
         }
-        let comment = createComment author text file.FileName filePath
-        addComment id comment
-        let task = id |> getTaskById |> Option.get
-        this.View("Index", task)
+        match addCommentWorkflow command with
+        | Ok ok -> 
+            match ok with
+            | Some task -> this.View("Index", task) :> IActionResult
+            | None -> this.NotFound() :> IActionResult
+        | Error _ -> this.UnprocessableEntity() :> IActionResult
+
 
     [<HttpGet("{id}/file/{filePath}")>]
     member this.DownloadFile(id: string, filePath: string) = 
-        let path = fileStoragePath + @"\" + id + @"\" + filePath
-        let stream = File.OpenRead path
+        let stream = getAttachmentFileStreamWorkflow id filePath
         this.File(stream, "application/octet-stream")

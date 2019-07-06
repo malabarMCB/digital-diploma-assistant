@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FsHttpContextAccessor.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="PartialApplication.fs" />
     <Compile Include="Controllers\MetodistController.fs" />

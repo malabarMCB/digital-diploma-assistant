@@ -1,26 +1,12 @@
 ﻿namespace Api.Controllers
 
-open Authentication
 open Microsoft.AspNetCore.Mvc
 open Api
 open Microsoft.AspNetCore.Http
-open System.Security.Claims
-open Microsoft.AspNetCore.Authentication;
-open Microsoft.AspNetCore.Authentication.Cookies;
 
 [<Route("[controller]")>]
 type LoginController (httpContextAccessor: IHttpContextAccessor) = 
     inherit Controller()
-       
-    let setAuthCookie (user: User) = 
-        let claims: Claim list = [
-            Claim(ClaimTypes.Sid, user.Id);
-            Claim(ClaimTypes.Name, user.FirstName)
-            Claim(ClaimTypes.Surname, user.LastName)
-            Claim(ClaimTypes.Role, user.Role.ToString())
-        ]
-        let id = ClaimsIdentity(claims, ClaimsIdentity.DefaultNameClaimType);
-        httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id)) |> Async.AwaitTask
 
     [<HttpGet>]
     member this.Index() =
@@ -29,7 +15,9 @@ type LoginController (httpContextAccessor: IHttpContextAccessor) =
     [<HttpPost>]
     member this.Post(login: string, password: string) =
         match authenticate(login, password) with
-        | Ok user -> user |> setAuthCookie |> ignore; this.Redirect("dashboard") :> IActionResult
+        | Ok user -> 
+            user |> FsHttpContextAccessor.setAuthCookie httpContextAccessor |> ignore
+            this.Redirect("dashboard") :> IActionResult
         | Error _ -> this.View("index") :> IActionResult
 
 

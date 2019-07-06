@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="IO.fs" />
     <Compile Include="EnvVariables.fs" />
   </ItemGroup>
 

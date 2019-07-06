@@ -12,5 +12,5 @@ type DashboardController () =
 
     [<HttpGet>]
     member this.Index() =
-        let items = getDashboardTasks()
+        let items = getDashboardTasksWorkflow()
         this.View(items)

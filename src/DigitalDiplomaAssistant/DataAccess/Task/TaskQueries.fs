@@ -4,13 +4,13 @@ open System
 open Nest
 open DataAccess
 open Domain
-open Domain.Task
+open Domain.TaskActions
 
 module Queries = 
     let private setElasticTaskId (hit: IHit<ElasticTask>): ElasticTask = 
         {hit.Source with Id = hit.Id}
 
-    let getDashboardTask (elasticOptions: ElasticOptions): DashboardTask seq =
+    let getDashboardTasks (elasticOptions: ElasticOptions): DashboardTask seq =
         elasticOptions 
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd ->  QueryContainer(MatchAllQuery()))
@@ -28,7 +28,7 @@ module Queries =
             }
         )
    
-    let getTaskById (getAvaliableStatuses: GetAvaliableStatuses) (elasticOptions: ElasticOptions) (id: string): Task option = 
+    let getTaskById (elasticOptions: ElasticOptions) (id: string): Task option = 
         elasticOptions
         |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
@@ -36,24 +36,23 @@ module Queries =
         |> FsNest.hits
         |> Seq.tryHead
         |> Option.map (setElasticTaskId >> fun task ->
-            let status = TaskStatusExtended.fromString task.Status
             {
                 Id = task.Id
-                Type = task.Type
+                Type = TaskType.fromString task.Type
                 Student = task.Student
                 Assignee = task.Assignee
                 Supervisor = task.Supervisor
                 Group = task.Group
                 Deadline = task.Deadline
-                Status = status
+                Status = TaskStatus.fromString task.Status
                 Description = task.Description
                 Comments = task.Comments
-                AvaliableStatuses = getAvaliableStatuses (TaskType.fromString task.Type) status
             }  
         )
 
     let getTaskDescription (elasticOptions: ElasticOptions) (taskType: TaskType) = 
-        elasticOptions |> FsNest.createElasticClient
+        elasticOptions 
+        |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
             QueryContainer(TermQuery(Field = Field("type"), Value = TaskType.toString taskType)))

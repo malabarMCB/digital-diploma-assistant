@@ -4,9 +4,9 @@ open Microsoft.AspNetCore.Mvc
 open Api
 open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Authentication.Cookies;
-open Domain.PublicTypes
 open System
 open Microsoft.AspNetCore.Http
+open Domain
 
 [<Route("[controller]")>]
 [<Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)>]
@@ -15,7 +15,7 @@ type MetodistController () =
 
     [<HttpGet>]
     member this.Index() = 
-        let description = getMetodistTaskDescription TaskType.PracticeDairy
+        let description = getMetodistTaskDescriptionWorkflow TaskType.PracticeDairy
         this.View("Index", description)
 
     [<HttpPost("deleteFile")>]
@@ -25,11 +25,11 @@ type MetodistController () =
             FilePath = file
             UploadDate = uploadDate
         }
-        deleteDesctiptionAttachments attachment taskType
-        let description = getMetodistTaskDescription TaskType.PracticeDairy
+        let description = deleteDescriptionAttachmentWorkflow attachment taskType
         this.View("Index", description)
 
     [<HttpPost>]
     member this.update([<FromForm>] text: string, [<FromForm>]file: IFormFile) = 
-        let description = getMetodistTaskDescription TaskType.PracticeDairy
+        //TODO: implement it
+        let description = getMetodistTaskDescriptionWorkflow TaskType.PracticeDairy
         this.View("Index", description)

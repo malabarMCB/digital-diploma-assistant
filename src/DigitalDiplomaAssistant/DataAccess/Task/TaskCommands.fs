@@ -90,7 +90,7 @@ module Commands =
         FsNest.updateByQuery client "dda-task" query script |> ignore
 
     let updateTaskDesctiption (elasticOptions: ElasticOptions) (taskType: TaskType) (description: Description) = 
-        let toElasticAttachment (attachment: Attachment)=
+        let toElasticAttachment (attachment: Attachment) =
             {
                 Name = attachment.Name
                 FilePath = attachment.FilePath

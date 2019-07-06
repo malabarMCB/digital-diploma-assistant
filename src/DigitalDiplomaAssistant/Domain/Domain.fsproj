@@ -6,7 +6,10 @@
 
     <ItemGroup>
       <Compile Include="DomainPublicTypes.fs" />
-      <Compile Include="Task.fs" />
+      <Compile Include="QueryPublicTypes.fs" />
+      <Compile Include="TaskActions.fs" />
+      <Compile Include="TaskWorkflowCommands.fs" />
+      <Compile Include="TaskWorkflows.fs" />
     </ItemGroup>
 
     <ItemGroup>
