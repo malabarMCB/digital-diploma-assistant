@@ -53,15 +53,14 @@ module Queries =
         )
 
     let getTaskDescription (elasticOptions: ElasticOptions) (taskType: TaskType) = 
-        let toMetodistTaskDescription (taskDescription: IHit<ElasticTask>): MetodistTaskDescription = 
-            {
-                Type = taskDescription.Source.Type |> TaskType.fromString
-                Description = taskDescription.Source.Description
-            }
         elasticOptions |> FsNest.createElasticClient
         |> FsNest.query<ElasticTask> "dda-task" (fun sd -> 
             sd.Size(Nullable(1)) |> ignore
             QueryContainer(TermQuery(Field = Field("type"), Value = TaskType.toString taskType)))
         |> FsNest.hits
         |> Seq.head
-        |> toMetodistTaskDescription
+        |> fun hit -> 
+            {
+                Type = hit.Source.Type |> TaskType.fromString
+                Description = hit.Source.Description
+            }
