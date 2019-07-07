@@ -4,7 +4,6 @@ open DataAccess
 open Common
 open Domain
 open Authentication
-open Domain.TaskWorkflows
 
 [<AutoOpen>]
 module PartialApplication = 
@@ -15,16 +14,16 @@ module PartialApplication =
             UserName = "Elastic:UserName" |> EnvVariables.getEnvVariableOption
             Password = "Elastic:Password" |> EnvVariables.getEnvVariableOption
         }
-    let getFileStoragePath() = 
+    let private getFileStoragePath() = 
         EnvVariables.getEnvVariableWithDefaultValue "FileStoragePath" @"D:\dda-file-storage"
+
+    let private getTaskById: GetTaskByIdFromDb = getElasticOptions() |> Task.Queries.getTaskById
     
     let authenticate = getElasticOptions() |> User.Queries.getUser |> Authentication.authenticate
 
     let getDashboardTasksWorkflow: GetDashboardTasksWorkflow =
         fun () ->
-            getElasticOptions() |> Task.Queries.getDashboardTasks
-
-    let private getTaskById: GetTaskById = getElasticOptions() |> Task.Queries.getTaskById
+            getElasticOptions() |> Task.Queries.getDashboardTasks  
 
     let getTaskWithAvaliableStatusesWorkflow: GetTaskWithAvaliableStatusesWorkflow = 
         fun taskId -> 
@@ -32,14 +31,14 @@ module PartialApplication =
 
     let changeStatusWorkflow: ChangeStatusWorkflow = 
         fun command -> 
-            let updateTaskByNewStatus: TaskWorkflows.UpdateTaskByNewStatus = getElasticOptions() |> User.Queries.getPersonByRole |> TaskActions.updateTaskByNewStatus
-            let updateTaskStatusInDb: TaskWorkflows.UpdateTaskStatusInDb = getElasticOptions() |> Task.Commands.updateTaskStatus
+            let updateTaskByNewStatus: UpdateTaskByNewStatus = getElasticOptions() |> User.Queries.getPersonByRole |> TaskActions.updateTaskByNewStatus
+            let updateTaskStatusInDb: UpdateTaskStatusInDb = getElasticOptions() |> Task.Commands.updateTaskStatus
             TaskWorkflows.changeStatus getTaskById updateTaskByNewStatus updateTaskStatusInDb TaskActions.createTaskWithAvaliableStatuses command
 
     let addCommentWorkflow: AddCommentWorkflow = 
         fun command ->
             let saveCommentFileToStorage: SaveCommentFileToStorage = getFileStoragePath() |>TaskActions.saveCommentFile 
-            let saveCommentToDb: SaveCommentToDb = getElasticOptions() |> Task.Commands.addComment 
+            let saveCommentToDb: AddCommentToDb = getElasticOptions() |> Task.Commands.addComment 
             TaskWorkflows.addComment saveCommentFileToStorage saveCommentToDb getTaskWithAvaliableStatusesWorkflow command
 
     let getAttachmentFileStreamWorkflow: GetAttachmentFileStreamWorkflow =

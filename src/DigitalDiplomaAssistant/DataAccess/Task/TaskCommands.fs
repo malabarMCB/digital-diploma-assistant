@@ -9,29 +9,31 @@ module Commands =
         Status: string
         Assignee: Person
     }
-    let updateTaskStatus (elasticOptions: ElasticOptions) (id: string) (status: TaskStatus) (assignee: Person) = 
-        elasticOptions |> FsNest.createElasticClient
-        |> FsNest.update "dda-task" id {
-            Lang = "painless"
-            Inline = "ctx._source.status = params.status; ctx._source.assignee = params.assignee"
-            Params = {
-                Status = status.ToString()
-                Assignee = assignee
-            }
-         } |> ignore
+    let updateTaskStatus: ElasticOptions -> UpdateTaskStatusInDb = 
+        fun elasticOptions id status assignee -> 
+            elasticOptions |> FsNest.createElasticClient
+            |> FsNest.update "dda-task" id {
+                Lang = "painless"
+                Inline = "ctx._source.status = params.status; ctx._source.assignee = params.assignee"
+                Params = {
+                    Status = status.ToString()
+                    Assignee = assignee
+                }
+             } |> ignore
     
     type CommentParams = {
         Comment: Comment
     }
-    let addComment (elasticOptions: ElasticOptions) (id: string) (comment: Comment) = 
-        elasticOptions |> FsNest.createElasticClient
-        |> FsNest.update "dda-task" id {
-            Lang = "painless"
-            Inline = "ctx._source.comments.add(params.comment)"
-            Params= {
-                Comment = comment
-            }
-        } |> ignore
+    let addComment: ElasticOptions -> AddCommentToDb = 
+        fun elasticOptions id comment -> 
+            elasticOptions |> FsNest.createElasticClient
+            |> FsNest.update "dda-task" id {
+                Lang = "painless"
+                Inline = "ctx._source.comments.add(params.comment)"
+                Params= {
+                    Comment = comment
+                }
+            } |> ignore
 
     //metodist
     type ElasticAttachment = {
@@ -65,29 +67,31 @@ module Commands =
         Description: ElasticDescription
     }
 
-    let deleteAttachmentDescription (elasticOptions: ElasticOptions) (attachment: Attachment) (taskType: TaskType) =
-        let query = {
-            Query = {
-                Term = {
-                    Type = {
-                      Value = TaskType.toString taskType
-                    }             
+    //let deleteAttachmentDescription (elasticOptions: ElasticOptions) (attachment: Attachment) (taskType: TaskType) =
+    let deleteAttachmentDescription: ElasticOptions ->  DeleteDescriptionAttachmentFromDb =
+        fun elasticOptions attachment taskType -> 
+            let query = {
+                Query = {
+                    Term = {
+                        Type = {
+                          Value = TaskType.toString taskType
+                        }             
+                    }
                 }
             }
-        }
-        let script: FsNest.Script<AttachmentParams> = {
-            Lang = "painless"
-            Inline = "ctx._source.description.attachments.remove(ctx._source.description.attachments.indexOf(params.attachment))"
-            Params= {
-                Attachment = {
-                    Name = attachment.Name
-                    FilePath = attachment.FilePath
-                    UploadDate = attachment.UploadDate.ToString "yyyy-MM-dd"
+            let script: FsNest.Script<AttachmentParams> = {
+                Lang = "painless"
+                Inline = "ctx._source.description.attachments.remove(ctx._source.description.attachments.indexOf(params.attachment))"
+                Params= {
+                    Attachment = {
+                        Name = attachment.Name
+                        FilePath = attachment.FilePath
+                        UploadDate = attachment.UploadDate.ToString "yyyy-MM-dd"
+                    }
                 }
             }
-        }
-        let client = elasticOptions |> FsNest.createElasticClient
-        FsNest.updateByQuery client "dda-task" query script |> ignore
+            let client = elasticOptions |> FsNest.createElasticClient
+            FsNest.updateByQuery client "dda-task" query script |> ignore
 
     let updateTaskDesctiption (elasticOptions: ElasticOptions) (taskType: TaskType) (description: Description) = 
         let toElasticAttachment (attachment: Attachment) =

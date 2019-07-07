@@ -6,9 +6,9 @@
 
     <ItemGroup>
       <Compile Include="DomainPublicTypes.fs" />
-      <Compile Include="QueryPublicTypes.fs" />
+      <Compile Include="DomainInternalTypes.fs" />
+      <Compile Include="DomainTypesActions.fs" />
       <Compile Include="TaskActions.fs" />
-      <Compile Include="TaskWorkflowCommands.fs" />
       <Compile Include="TaskWorkflows.fs" />
     </ItemGroup>
 

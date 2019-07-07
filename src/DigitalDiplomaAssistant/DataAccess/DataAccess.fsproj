@@ -7,6 +7,7 @@
     <ItemGroup>
       <Compile Include="ElasticConfig.fs" />
       <Compile Include="FsNest.fs" />
+      <Compile Include="TypeActions.fs" />
       <Compile Include="User\UserPublicTypes.fs" />
       <Compile Include="User\UserQueries.fs" />
       <Compile Include="Task\TaskPublicTypes.fs" />

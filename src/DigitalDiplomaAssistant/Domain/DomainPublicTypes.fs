@@ -1,6 +1,8 @@
 ﻿namespace Domain
 
-open System;
+open System
+open System.IO
+open Authentication
 
 type Person = {
     Id: string
@@ -41,19 +43,6 @@ type TaskStatus =
 | UnicheckValidatorInProgress = 8
 | ReadyForMetodist = 9
 
-module TaskStatus = 
-    let fromString (status: string) = 
-        match status with 
-        | "StudentToDo" -> TaskStatus.StudentToDo
-        | "StudentInProgress" -> TaskStatus.StudentInProgress
-        | "SupervisorToDo" -> TaskStatus.SupervisorToDo
-        | "SupervisorInProgress" -> TaskStatus.SupervisorInProgress
-        | "NormControllerToDo" -> TaskStatus.NormControllerToDo
-        | "NormControllerInProgress" -> TaskStatus.NormControllerInProgress
-        | "UnicheckValidatorToDo" -> TaskStatus.UnicheckValidatorToDo
-        | "UnicheckValidatorInProgress" -> TaskStatus.UnicheckValidatorInProgress
-        | "ReadyForMetodist" -> TaskStatus.ReadyForMetodist
-
 type TaskType = 
    | PracticePresentation = 1
    | PracticeDairy = 2
@@ -67,35 +56,7 @@ type TaskType =
    | GuaranteeMail = 10
    | Diploma = 11
 
-module TaskType = 
 
-    let toString (taskType: TaskType) = 
-        match taskType with
-        | TaskType.PracticePresentation -> "Презентація захисту практики"
-        | TaskType.PracticeDairy -> "Щоденник практики"
-        | TaskType.PracticeReport -> "Звіт з практики"
-        | TaskType.TopicAcceptanceDocument -> "Бланк заяви про обрання теми"
-        | TaskType.PracticeReview -> "Відгук з практики"
-        | TaskType.PreDefencePresentation -> "Презентація предзахисту"
-        | TaskType.DefencePresentation -> "Презентація до захисту"
-        | TaskType.SupervisorReview -> "Відгук наукового керівника"
-        | TaskType.InjectionAct -> "Акти впровадженя"
-        | TaskType.GuaranteeMail -> "Гарантійний лист"
-        | TaskType.Diploma -> "Дипломна робота"
-
-    let fromString (taskType: string) = 
-        match taskType with
-        | "Презентація захисту практики" -> TaskType.PracticePresentation
-        | "Щоденник практики" -> TaskType.PracticeDairy
-        | "Звіт з практики" -> TaskType.PracticeReport
-        | "Бланк заяви про обрання теми" -> TaskType.TopicAcceptanceDocument
-        | "Відгук з практики" -> TaskType.PracticeReview
-        | "Презентація предзахисту" -> TaskType.PreDefencePresentation
-        | "Презентація до захисту" -> TaskType.DefencePresentation
-        | "Відгук наукового керівника" -> TaskType.SupervisorReview
-        | "Акти впровадженя" -> TaskType.InjectionAct
-        | "Гарантійний лист" -> TaskType.GuaranteeMail
-        | "Дипломна робота" -> TaskType.Diploma
 
 type Task = {
     Id: string
@@ -110,3 +71,77 @@ type Task = {
     Comments: Comment list
 }
 
+[<AutoOpen>]
+module TaskQueryPublicTypes = 
+    type DashboardTaskStatus =
+        | ToDo
+        | InProgress
+        | Done
+    
+    type DashboardTask = {
+        Id: string
+        Type: string
+        Student: string
+        Assignee: string
+        Group: string
+        Status: DashboardTaskStatus
+        Deadline: DateTime
+        Supervisor: string
+    }
+    
+    type TaskWithAvaliableStatuses = {
+        Id: string
+        Type: TaskType
+        Student: Student
+        Assignee: Assignee
+        Supervisor: Supervisor
+        Group: string
+        Status: TaskStatus
+        Deadline: DateTime
+        Description: Description
+        Comments: Comment list
+        AvaliableStatuses: TaskStatus list
+    }
+    
+    type MetodistTaskDescription = {
+        Type: TaskType
+        Description: Description
+    }
+
+[<AutoOpen>]
+module TaskWorkflowCommands = 
+    type ChangeTaskStatusCommand = {
+        TaskId: string
+        TaskStatus: TaskStatus
+    }
+
+    type AddCommentCommand = {
+        TaskId: string
+        CommentText: string
+        AttachmentStream: Stream
+        AttachmentName: string
+        CommentAuthor: Person
+    }
+
+[<AutoOpen>]
+module Results = 
+    type GetTaskWithAvaliableStatusesResult = Result<TaskWithAvaliableStatuses, string>
+    type GetOptionalTaskWithAvaliableStatusesResult = Result<TaskWithAvaliableStatuses option, string>
+
+[<AutoOpen>]
+module WorkflowInterfaces = 
+    type GetTaskWithAvaliableStatusesWorkflow = string -> GetOptionalTaskWithAvaliableStatusesResult
+    type ChangeStatusWorkflow = ChangeTaskStatusCommand -> GetTaskWithAvaliableStatusesResult
+    type AddCommentWorkflow = AddCommentCommand -> GetOptionalTaskWithAvaliableStatusesResult
+    type GetAttachmentFileStreamWorkflow = string -> string -> FileStream
+    type GetDashboardTasksWorkflow = unit -> seq<DashboardTask>
+    type GetMetodistTaskDescriptionWorkflow = TaskType -> MetodistTaskDescription
+    type DeleteDescriptionAttachmentWorkflow = Attachment -> TaskType -> MetodistTaskDescription
+
+[<AutoOpen>]
+module DataAccessInterfaces = 
+    type GetTaskByIdFromDb = string -> Task option
+    type UpdateTaskStatusInDb = string -> TaskStatus -> Person -> unit
+    type AddCommentToDb = string -> Comment -> unit
+    type DeleteDescriptionAttachmentFromDb = Attachment -> TaskType -> unit
+    type GetPersonByRole = UserRole -> Person

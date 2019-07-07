@@ -1,34 +1,11 @@
 ﻿namespace Domain
 
 open System
-open System.IO
+open Domain.InternalInterfaces
 
 module TaskWorkflows =   
-    //results
-    type GetTaskWithAvaliableStatusesResult = Result<TaskWithAvaliableStatuses, string>
-    type GetOptionalTaskWithAvaliableStatusesResult = Result<TaskWithAvaliableStatuses option, string>
 
-    type CreateTaskWithAvaliableStatuses = Task -> GetTaskWithAvaliableStatusesResult
-    type UpdateTaskByNewStatus = Task -> TaskStatus -> Task 
-    type SaveCommentFileToStorage = string -> string -> Stream -> string
-    type GetFileStream = string -> FileStream
-
-    //database
-    type GetTaskById = string -> Task option
-    type UpdateTaskStatusInDb = string -> TaskStatus -> Person -> unit
-    type SaveCommentToDb = string -> Comment -> unit
-    type DeleteDescriptionAttachmentFromDb = Attachment -> TaskType -> unit
-
-    //interfaces
-    type GetTaskWithAvaliableStatusesWorkflow = string -> GetOptionalTaskWithAvaliableStatusesResult
-    type ChangeStatusWorkflow = ChangeTaskStatusCommand -> GetTaskWithAvaliableStatusesResult
-    type AddCommentWorkflow = AddCommentCommand -> GetOptionalTaskWithAvaliableStatusesResult
-    type GetAttachmentFileStreamWorkflow = string -> string -> FileStream
-    type GetDashboardTasksWorkflow = unit -> seq<DashboardTask>
-    type GetMetodistTaskDescriptionWorkflow = TaskType -> MetodistTaskDescription
-    type DeleteDescriptionAttachmentWorkflow = Attachment -> TaskType -> MetodistTaskDescription
-
-    let getTaskWithAvaliableStatuses: GetTaskById -> CreateTaskWithAvaliableStatuses -> GetTaskWithAvaliableStatusesWorkflow =
+    let getTaskWithAvaliableStatuses: GetTaskByIdFromDb -> CreateTaskWithAvaliableStatuses -> GetTaskWithAvaliableStatusesWorkflow =
         fun getTaskById createTaskWithAvaliableStatuses id -> 
             match getTaskById id with
             | Some task ->
@@ -37,7 +14,7 @@ module TaskWorkflows =
                 |> Result.map(fun x -> Some x)
             | None -> Ok None
 
-    let changeStatus: GetTaskById -> UpdateTaskByNewStatus -> UpdateTaskStatusInDb -> CreateTaskWithAvaliableStatuses ->  ChangeStatusWorkflow = 
+    let changeStatus: GetTaskByIdFromDb -> UpdateTaskByNewStatus -> UpdateTaskStatusInDb -> CreateTaskWithAvaliableStatuses ->  ChangeStatusWorkflow = 
         fun getTaskById updateTaskByNewStatus updateTaskStatusInDb createTaskWithAvaliableStatuses command ->
             match getTaskById command.TaskId with
             | Some task -> 
@@ -46,7 +23,7 @@ module TaskWorkflows =
                 task |> createTaskWithAvaliableStatuses
             | None -> Error "Incorrect task id"
 
-    let addComment: SaveCommentFileToStorage -> SaveCommentToDb -> GetTaskWithAvaliableStatusesWorkflow -> AddCommentWorkflow = 
+    let addComment: SaveCommentFileToStorage -> AddCommentToDb -> GetTaskWithAvaliableStatusesWorkflow -> AddCommentWorkflow = 
         fun saveCommentFileToStorage saveCommentToDb getTaskWithAvaliableStatuses command -> 
             let filePath = saveCommentFileToStorage command.TaskId command.AttachmentName command.AttachmentStream
             let comment = {
