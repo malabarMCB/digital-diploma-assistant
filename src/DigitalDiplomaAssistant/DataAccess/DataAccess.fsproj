@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Include="ElasticConfig.fs" />
+      <Compile Include="FsNestPublicTypes.fs" />
       <Compile Include="FsNest.fs" />
       <Compile Include="TypeActions.fs" />
       <Compile Include="User\UserPublicTypes.fs" />

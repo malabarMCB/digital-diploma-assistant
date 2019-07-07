@@ -29,7 +29,7 @@ type TaskController(httpContextAccessor: IHttpContextAccessor) =
             TaskStatus = status
         }
         match changeStatusWorkflow command with
-        | Ok ok -> this.View(ok) :> IActionResult
+        | Ok ok -> this.View("Index", ok) :> IActionResult
         | Error _ -> this.UnprocessableEntity() :> IActionResult
 
 
