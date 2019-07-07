@@ -1,10 +1,8 @@
 ﻿namespace Domain
 
 open System
-open Domain.InternalInterfaces
 
 module TaskWorkflows =   
-
     let getTaskWithAvaliableStatuses: GetTaskByIdFromDb -> CreateTaskWithAvaliableStatuses -> GetTaskWithAvaliableStatusesWorkflow =
         fun getTaskById createTaskWithAvaliableStatuses id -> 
             match getTaskById id with

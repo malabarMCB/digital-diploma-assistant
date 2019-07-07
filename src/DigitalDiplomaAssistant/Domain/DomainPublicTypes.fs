@@ -33,15 +33,15 @@ type Comment = {
 }
 
 type TaskStatus = 
-| StudentToDo = 1
-| StudentInProgress = 2
-| SupervisorToDo = 3
-| SupervisorInProgress = 4
-| NormControllerToDo = 5
-| NormControllerInProgress = 6
-| UnicheckValidatorToDo = 7
-| UnicheckValidatorInProgress = 8
-| ReadyForMetodist = 9
+    | StudentToDo = 1
+    | StudentInProgress = 2
+    | SupervisorToDo = 3
+    | SupervisorInProgress = 4
+    | NormControllerToDo = 5
+    | NormControllerInProgress = 6
+    | UnicheckValidatorToDo = 7
+    | UnicheckValidatorInProgress = 8
+    | ReadyForMetodist = 9
 
 type TaskType = 
    | PracticePresentation = 1
@@ -145,3 +145,10 @@ module DataAccessInterfaces =
     type AddCommentToDb = string -> Comment -> unit
     type DeleteDescriptionAttachmentFromDb = Attachment -> TaskType -> unit
     type GetPersonByRole = UserRole -> Person
+
+[<AutoOpen>]
+module InternalInterfaces = 
+    type CreateTaskWithAvaliableStatuses = Task -> GetTaskWithAvaliableStatusesResult
+    type UpdateTaskByNewStatus = Task -> TaskStatus -> Task 
+    type SaveCommentFileToStorage = string -> string -> Stream -> string
+    type GetFileStream = string -> FileStream

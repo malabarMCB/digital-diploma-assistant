@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <Compile Include="DomainPublicTypes.fs" />
-      <Compile Include="DomainInternalTypes.fs" />
       <Compile Include="DomainTypesActions.fs" />
       <Compile Include="TaskActions.fs" />
       <Compile Include="TaskWorkflows.fs" />
