@@ -34,115 +34,114 @@
     }
 </script>
 
-        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 
-            <a class="navbar-brand" href="#">Digital Diploma Checker</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <a class="navbar-brand" href="#">Digital Diploma Checker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/dashboard">
-                            Дешборд <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Розширенi опцii
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/metodist">Редагувати задачі</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Вихiд з системи</a>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-
-                <div class="container">
-                    <div class="card text-center">
-                        <div class="card-header">
-                            Оберiть задачу:
-                    <div class="btn-group">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Варiанти...
-                        </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button">Презентація захисту практики</button>
-                                    <button class="dropdown-item" type="button">Щоденник практики</button>
-                                    <button class="dropdown-item" type="button">Звіт з практики</button>
-                                    <button class="dropdown-item" type="button">Бланк заяви про обрання теми</button>
-                                    <button class="dropdown-item" type="button">Відгук з практики</button>
-                                    <button class="dropdown-item" type="button">Презентація предзахисту</button>
-                                    <button class="dropdown-item" type="button">Презентація до захисту</button>
-                                    <button class="dropdown-item" type="button">Відгук наукового керівника</button>
-                                    <button class="dropdown-item" type="button">Акти впровадженя</button>
-                                    <button class="dropdown-item" type="button">Гарантійний лист</button>
-                                    <button class="dropdown-item" type="button">Дипломна робота</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <textarea onchange="onchangeText()" class="form-control" id="descriptionText" rows="10">@Model.Description.Text</textarea>
-                                </div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            @foreach (var file in @Model.Description.Attachments)
-                                    {
-                                                <form action="/metodist/deleteFile" method="post">
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item">
-                                                            <a href="">@file.Name</a> <br>
-                                                                <input value="@file.Name" name="name" hidden="true" />
-                                                                <input value="@file.FilePath" name="file" hidden="true" />
-                                                                <input value="@file.UploadDate" name="uploadDate" hidden="true" />
-                                                                <input value="@Model.Type" name="taskType" hidden="true" />
-                                                                <button type="submit"
-                                                                    class="btn btn-outline-danger">
-                                                                    Видалити
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                                    }
-
-                                </div>
-                                                <div class="col-sm">
-                                                    <li class="list-group-item">
-                                                        <h5><label for="exampleFormControlFile1">Завантажити новий файл:</label></h5>
-                                                        <form enctype="multipart/form-data" method="post" action="/metodist">
-                                                            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
-                                                            <input hidden="true" name="text" id="descriptionTextHidden" value="@Model.Description.Text"/>
-                                                            <br>
-                                                            <button type="submit" class="btn btn-primary">Зберегти</button>
-                                                        </form>
-
-                                    </li>
-                                </div>
-                            </div>
-                                                </div>
-                                                <div class="form-group">
-
-                                                </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">
+                    Дешборд <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Розширенi опцii
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/metodist">Редагувати задачі</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Вихiд з системи</a>
                 </div>
-                </ul>
-                                    </div>
-                                    <br>
+            </li>
 
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            Оберiть задачу:
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Варiанти...
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Презентація захисту практики</button>
+                    <button class="dropdown-item" type="button">Щоденник практики</button>
+                    <button class="dropdown-item" type="button">Звіт з практики</button>
+                    <button class="dropdown-item" type="button">Бланк заяви про обрання теми</button>
+                    <button class="dropdown-item" type="button">Відгук з практики</button>
+                    <button class="dropdown-item" type="button">Презентація предзахисту</button>
+                    <button class="dropdown-item" type="button">Презентація до захисту</button>
+                    <button class="dropdown-item" type="button">Відгук наукового керівника</button>
+                    <button class="dropdown-item" type="button">Акти впровадженя</button>
+                    <button class="dropdown-item" type="button">Гарантійний лист</button>
+                    <button class="dropdown-item" type="button">Дипломна робота</button>
+                </div>
+            </div>
         </div>
-                                </div>
+        <div class="card-body">
+            <h5 class="card-title"></h5>
 
+            <p class="card-text">
+            <div class="form-group">
+                <textarea onchange="onchangeText()" class="form-control" id="descriptionText" rows="10">@Model.Description.Text</textarea>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        @foreach (var file in Model.Description.Attachments)
+                        {
+                            <form action="/metodist/deleteFile" method="post">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="">@file.Name</a> <br>
+                                        <input value="@file.Name" name="name" hidden="true"/>
+                                        <input value="@file.FilePath" name="file" hidden="true"/>
+                                        <input value="@file.UploadDate" name="uploadDate" hidden="true"/>
+                                        <input value="@Model.Type" name="taskType" hidden="true"/>
+                                        <button type="submit"
+                                                class="btn btn-outline-danger">
+                                            Видалити
+                                        </button>
+                                    </li>
+                                </ul>
+                            </form>
+                        }
+
+                    </div>
+                    <div class="col-sm">
+                        <li class="list-group-item">
+                            <h5>
+                                <label for="exampleFormControlFile1">Завантажити новий файл:</label>
+                            </h5>
+                            <form enctype="multipart/form-data" method="post" action="/metodist">
+                                <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                                <input hidden="true" name="text" id="descriptionTextHidden" value="@Model.Description.Text"/>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Зберегти</button>
+                            </form>
+
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
+            </div>
+        </div>
+    </div>
+    <br>
+
+</div>
 </body>
 </html>
