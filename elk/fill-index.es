@@ -184,11 +184,11 @@ PUT dda-task/_doc/_mapping
 
 POST _bulk
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type":"Щоденник практики","student":{"id":"aa","firstName":"Антон","lastName":"Солярик"},"assignee":{"id":"aa","firstName":"Антон","lastName":"Солярик"},"supervisor":{"id":"bbb","firstName":"Альона","lastName":"Яковенко"},"group":"БС-51","status":"StudentInProgress","deadline":"2019-03-19","comments":[{"author":{"id":1,"firstName":"Антон","lastName":"Солярик"},"text":"very awesome comment","postDate":"2019-05-12","attachments":[{"name":"my diploma.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-12"}]},{"author":{"id":1,"firstName":"Антон","lastName":"Солярик"},"text":"another awesome comment","postDate":"2019-05-15","attachments":[{"name":"my diploma(2).docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}],"description":{"text":"perfect explanations","attachments":[{"name":"sample1.docx","filePath":"C:\\dda-storage","uploadDate":"2019-01-10"},{"name":"sample2.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}}
+{"type":"Щоденник практики","student":{"id":"aa","firstName":"Jane","lastName":"Doe"},"assignee":{"id":"aa","firstName":"Jane","lastName":"Doe"},"supervisor":{"id":"bbb","firstName":"John","lastName":"Smith"},"group":"ІПЗ","status":"StudentInProgress","deadline":"2019-03-19","comments":[{"author":{"id":1,"firstName":"Jane","lastName":"Doe"},"text":"very awesome comment","postDate":"2019-05-12","attachments":[{"name":"my diploma.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-12"}]},{"author":{"id":1,"firstName":"Jane","lastName":"Doe"},"text":"another awesome comment","postDate":"2019-05-15","attachments":[{"name":"my diploma(2).docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}],"description":{"text":"perfect explanations","attachments":[{"name":"sample1.docx","filePath":"C:\\dda-storage","uploadDate":"2019-01-10"},{"name":"sample2.docx","filePath":"C:\\dda-storage","uploadDate":"2019-05-15"}]}}
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Звіт з практики", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "supervisor": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "StudentToDo", "deadline": "2019-03-19"}
+{"type": "Звіт з практики", "student": {"id":"aa", "firstName":"Jane", "lastName": "Doe"}, "assignee": {"id":"aa", "firstName":"Jane", "lastName": "Doe"}, "supervisor": {"id":"bbb", "firstName":"John", "lastName": "Smith"}, "group": "ІПЗ", "status": "StudentToDo", "deadline": "2019-03-19"}
 { "index" : { "_index" : "dda-task", "_type" : "_doc" } }
-{"type": "Відгук керівника", "student": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "assignee": {"id":"aa", "firstName":"Антон", "lastName": "Солярик"}, "supervisor": {"id":"bbb", "firstName":"Альона", "lastName": "Яковенко"}, "group": "БС-51", "status": "StudentToDo", "deadline": "2019-03-19"}
+{"type": "Відгук керівника", "student": {"id":"aa", "firstName":"Jane", "lastName": "Doe"}, "assignee": {"id":"aa", "firstName":"Jane", "lastName": "Doe"}, "supervisor": {"id":"bbb", "firstName":"John", "lastName": "Smith"}, "group": "ІПЗ", "status": "StudentToDo", "deadline": "2019-03-19"}
 
 
 DELETE dda-user
@@ -217,7 +217,7 @@ PUT dda-user/_doc/_mapping
 
 POST _bulk
 {"index": {"_index":"dda-user", "_type":"_doc","_id": "1"}}
-{"login":"login", "password": "123", "firstName": "Антон", "lastName":"Солярик", "role":"student"}
+{"login":"login", "password": "123", "firstName": "Jane", "lastName":"Doe", "role":"student"}
 {"index": {"_index":"dda-user", "_type":"_doc","_id": "2"}}
 {"login":"login1", "password": "123", "firstName": "НормконтроллерfirstName", "lastName":"НормконтролерlastName", "role":"normController"}
 {"index": {"_index":"dda-user", "_type":"_doc","_id": "3"}}
