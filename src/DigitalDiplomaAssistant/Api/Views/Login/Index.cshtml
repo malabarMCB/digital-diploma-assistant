@@ -15,19 +15,18 @@
         <source srcset="logo.png" media="(max-width: 100px)">
         <img src="~/logo.png" alt="MDN">
     </picture>
-    <form asp-controller="Login"  method="post">
+    <form asp-controller="Login" asp-action="Login" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Login</label>
-            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="login">
+            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter login" name="login">
             <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Enter password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <!-- Content here -->
 </div>
 </body>
 </html>
