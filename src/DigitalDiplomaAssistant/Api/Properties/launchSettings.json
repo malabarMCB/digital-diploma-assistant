@@ -19,7 +19,7 @@
     },
     "Api": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "dashboard",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

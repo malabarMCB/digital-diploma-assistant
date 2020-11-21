@@ -6,8 +6,8 @@ elasticsearch:
   ports:
     - "9200:9200"
     - "9300:9300"
-  volumes:
-    - /home/malabar/elk/elastic:/usr/share/elasticsearch/data
+  # volumes:
+  #   - /home/malabar/elk/elastic:/usr/share/elasticsearch/data
 
 kibana:
   image: docker.elastic.co/kibana/kibana:6.6.0
